@@ -2,33 +2,96 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Para Sarah 💕</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Para Sarah 💖</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-  <h1>Sarah 💖</h1>
-  <p>Hoje faz exatamente:</p>
-  <div class="timer" id="timer">Carregando...</div>
+  <!-- Botão e mensagem secreta -->
+  <button id="secretMessageBtn">💝 Mensagem Secreta</button>
+  <div id="secretMessage" class="hidden">Você é meu presente diário, meu amor! 💖</div>
 
-  <div id="countdown"></div>
+  <header>
+    <h1>Sarah 💖</h1>
+    <p class="subtitle">Meu amor, minha inspiração, meu tudo ✨</p>
+  </header>
 
-  <p>
-    Cada dia é um presente, cada sorriso seu é o meu sol, e cada abraço seu é o meu lar.  
-    Obrigado por ser a razão da minha felicidade, meu amor, minha melhor amiga, minha inspiração.  
-    Que venham muitos e muitos outros dias 4 pra gente comemorar, juntos. 💘
-  </p>
+  <main>
+    <section class="welcome">
+      <h2>🌸 Bem-vinda, amor da minha vida!</h2>
+      <p>Essa página é feita todinha pra você, que ilumina meu mundo e meu coração. 💫</p>
+    </section>
 
-  <p class="extra" id="randomMessage">Você é a coisa mais linda que já me aconteceu. 🌹</p>
-  <div class="heart">❤️</div>
+    <section class="timer-section">
+      <h2>❤️ Nosso amor dura:</h2>
+      <div id="timer">Carregando...</div>
+    </section>
 
-  <!-- Galeria com fotos em forma de coração -->
-  <div class="gallery">
-    <img src="./WhatsApp Image 2025-04-04 at 14.49.26 (1).jpeg" alt="Nós" class="heart-image" />
-    <img src="./WhatsApp Image 2025-04-04 at 14.37.58.jpeg" alt="Sorrisos" class="heart-image" />
-    <img src="./WhatsApp Image 2025-04-04 at 14.49.26.jpeg" alt="Momentos" class="heart-image" />
-  </div>
+    <section class="countdown-section">
+      <h2>⏳ Faltam...</h2>
+      <div id="countdown">Carregando...</div>
+      <div class="progress-bar">
+        <div id="progress"></div>
+      </div>
+    </section>
 
+    <section id="translator" aria-label="Seção do tradutor fofo">
+      <h1>Tradutor Fofo 💕</h1>
+      <input type="text" id="inputText" aria-label="Digite sua frase para traduzir" placeholder="Digite sua frase aqui..." />
+      <div class="buttons">
+        <button id="translateMinion" aria-label="Traduzir para Minion">Minion 🐵</button>
+        <button id="translateYoda" aria-label="Traduzir para Yoda">Yoda 🧙‍♂️</button>
+        <button id="translateElfo" aria-label="Traduzir para Elfo">Elfo 🧝‍♂️</button>
+      </div>
+      <div id="translatedMessage" aria-live="polite" aria-atomic="true"></div>
+    </section>
+
+    <section class="message-section">
+      <p id="randomMessage">Você é a coisa mais linda que já me aconteceu. 🌹</p>
+      <div class="buttons">
+        <button id="newMessageBtn">💌 Nova frase</button>
+        <button id="sendKissBtn">😘 Enviar Beijo</button>
+        <button id="sendHugBtn">🤗 Enviar Abraço</button>
+      </div>
+    </section>
+
+    <section class="heart-section">
+      <div id="mainHeart">❤️</div>
+    </section>
+
+    <section class="gallery-section">
+      <h2>📸 Nossos Momentos</h2>
+      <div class="gallery">
+        <img src="./WhatsApp Image 2025-04-04 at 14.49.26 (1).jpeg" alt="Nós sorrindo juntos" class="heart-image" />
+        <img src="./WhatsApp Image 2025-04-04 at 14.37.58.jpeg" alt="Sorrisos compartilhados" class="heart-image" />
+        <img src="./WhatsApp Image 2025-04-04 at 14.49.26.jpeg" alt="Momentos felizes" class="heart-image" />
+      </div>
+    </section>
+
+    <section class="dreams-section">
+      <h2>🌈 Nossos Sonhos</h2>
+      <ul>
+        <li>Viajar o mundo de mãos dadas ✈️💑</li>
+        <li>Ter nossa casinha dos sonhos 🏡💖</li>
+        <li>Adotar um pet fofo 🐶🐱</li>
+        <li>Celebrar todos os dias nosso amor 🎉💘</li>
+      </ul>
+    </section>
+
+    <section class="surprise-section">
+      <h2>✨ Surpresinhas!</h2>
+      <button id="butterflyBtn">🦋 Soltar Borboletas</button>
+      <button id="starsBtn">🌟 Chuva de Estrelas</button>
+    </section>
+  </main>
+
+  <footer>
+    <p>💖 Feito com muito amor para Sarah — Te amo pra sempre 💖</p>
+  </footer>
+
+  <!-- Seu script externo -->
   <script src="script.js"></script>
 </body>
 </html>
