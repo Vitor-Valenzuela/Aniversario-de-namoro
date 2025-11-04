@@ -84,7 +84,17 @@
     }
 
     #qrcode {
-      margin-top: 15px;
+      margin: 15px auto 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    .counter-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.1rem;
     }
 
     footer {
@@ -127,6 +137,14 @@
     <p class="sub">Vitor & Sarah — juntos desde 04/10/2024 🌷</p>
   </header>
 
+  <!-- Contadores -->
+  <section class="counter-section">
+    <h2>⏳ Nosso Tempo Juntos</h2>
+    <p id="totalTime"></p>
+    <p id="monthProgress"></p>
+    <p id="reunionCountdown"></p>
+  </section>
+
   <!-- Mensagem do dia -->
   <section>
     <h2>💌 Mensagem do Dia</h2>
@@ -152,7 +170,7 @@
     <div id="qrcode"></div>
   </section>
 
-  <!-- Botões especiais -->
+  <!-- Botões -->
   <div style="margin: 30px;">
     <button id="toggleHeartsBtn">💗 Amor sem fim</button>
     <button id="themeToggle">🌗 Tema</button>
@@ -198,7 +216,37 @@
         refreshDailyMessage();
       });
 
-      // QR code da música
+      // Contadores
+      const startDate = new Date("2024-10-04T00:00:00");
+      const reunionDate = new Date("2025-12-31T00:00:00");
+
+      function updateTotalTime() {
+        const now = new Date();
+        const diff = now - startDate;
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const months = Math.floor(days / 30.44);
+        const years = Math.floor(months / 12);
+        document.getElementById("totalTime").textContent =
+          `💑 ${years} ano(s), ${months % 12} mês(es) e ${days % 30} dia(s) juntos!`;
+      }
+
+      function updateMonthProgress() {
+        const now = new Date();
+        const daysInMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+        const progress = ((now.getDate() / daysInMonth) * 100).toFixed(1);
+        document.getElementById("monthProgress").textContent =
+          `📅 Mês em ${progress}% concluído`;
+      }
+
+      function updateReunionCountdown() {
+        const now = new Date();
+        const diff = reunionDate - now;
+        const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+        document.getElementById("reunionCountdown").textContent =
+          `💌 Faltam ${days} dia(s) para o reencontro!`;
+      }
+
+      // QR code
       showQRBtn.addEventListener("click", () => {
         qrcodeEl.innerHTML = "";
         new QRCode(qrcodeEl, {
@@ -240,7 +288,16 @@
         if (heartsActive) setInterval(createHeart, 500);
       });
 
+      // Atualizações contínuas
       refreshDailyMessage();
+      updateTotalTime();
+      updateMonthProgress();
+      updateReunionCountdown();
+      setInterval(() => {
+        updateTotalTime();
+        updateMonthProgress();
+        updateReunionCountdown();
+      }, 1000);
     });
   </script>
 </body>
