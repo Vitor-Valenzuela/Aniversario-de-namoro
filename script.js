@@ -51,10 +51,16 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function updateLoveTimer(){
-    const now = new Date();
-    const t = computeYMDHMS(START, now);
-    loveTimerEl.textContent = `${t.years} anos • ${t.months} meses • ${t.days} dias • ${pad(t.hours)}:${pad(t.minutes)}:${pad(t.seconds)}`;
-  }
+  const now = new Date();
+  const diff = now - START;
+  const totalDays = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((diff / (1000 * 60)) % 60);
+  const seconds = Math.floor((diff / 1000) % 60);
+
+  loveTimerEl.textContent = `${totalDays} dias • ${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+}
+
 
   function nextDay4Reference(now){
     let year = now.getFullYear();
@@ -144,3 +150,4 @@ document.addEventListener("DOMContentLoaded", () => {
   setInterval(updateLoveTimer, 1000);
   setInterval(updateNextCountdown, 1000);
 });
+
