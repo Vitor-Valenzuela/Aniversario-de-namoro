@@ -4,57 +4,52 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Vitor & Sarah — Nosso Tempo</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Pacifico&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-
-    <header class="topbar">
-      <div class="title">
+  <div class="frame">
+    <header class="header">
+      <div class="brand">
         <h1>Vitor & Sarah</h1>
-        <p class="since">Desde 04/10/2024</p>
       </div>
       <div class="tools">
-        <button id="themeToggle" aria-label="Alternar tema">🌗</button>
+        <button id="themeToggle" class="icon-btn" aria-label="Alternar tema">🌗</button>
       </div>
     </header>
 
-    <main>
-      <section class="card counters">
-        <div class="block">
+    <main class="main">
+      <section class="panel counters">
+        <div class="card counter-card">
           <h2>Tempo juntos</h2>
-          <div id="loveTimer" class="time">00d 00h 00m 00s</div>
-          <p class="hint">Contador em tempo real desde 04/10/2024</p>
+          <div id="loveTimer" class="big-time">-- anos • -- meses • -- dias • 00:00:00</div>
+          <p class="muted">Desde 04/10/2024</p>
         </div>
 
-        <div class="block">
+        <div class="card counter-card">
           <h2>Próximo mêsversário</h2>
-          <div id="nextCountdown" class="time">Carregando...</div>
+          <div id="nextCountdown" class="big-time">Carregando...</div>
           <div class="progress-track" aria-hidden="true">
             <div id="monthProgress" class="progress"></div>
           </div>
-          <p class="hint">Mêsversário no dia 4 de cada mês</p>
+          <p class="muted">Mêsversário dia 4 de cada mês</p>
         </div>
       </section>
 
       <section class="card moments">
         <h2>Nossos Momentos</h2>
-        <p class="hint">Toque na foto para ampliar</p>
+        <p class="muted">Toque na foto para ampliar</p>
         <div class="gallery" id="gallery">
           <figure class="photo">
             <img src="./WhatsApp Image 2025-04-04 at 14.49.26 (1).jpeg" alt="Nós sorrindo juntos" data-caption="Praça, risos e sol">
-            <figcaption>Praça, risos e sol</figcaption>
           </figure>
 
           <figure class="photo">
             <img src="./WhatsApp Image 2025-04-04 at 14.37.58.jpeg" alt="Sorrisos compartilhados" data-caption="Noite de pizza e filme">
-            <figcaption>Noite de pizza e filme</figcaption>
           </figure>
 
           <figure class="photo">
             <img src="./WhatsApp Image 2025-04-04 at 14.49.26.jpeg" alt="Momentos felizes" data-caption="Nosso abraço preferido">
-            <figcaption>Abraço apertado</figcaption>
           </figure>
         </div>
       </section>
@@ -65,23 +60,22 @@
           <button id="randomMsgBtn">💌 Nova frase</button>
           <button id="kissBtn">😘 Beijo</button>
           <button id="hugBtn">🤗 Abraço</button>
-          <button id="butterfliesBtn">🦋 Borboletas</button>
+          <button id="heartsBtn">💘 Chuva de corações</button>
         </div>
-        <p id="randomMsg" class="random-text">Você é meu motivo favorito para sorrir.</p>
+        <div id="randomMsg" class="random-text">Você é meu motivo favorito para sorrir.</div>
       </section>
     </main>
 
-    <footer class="foot">
-      <small>Feito com carinho para Sarah. Te amo.</small>
+    <footer class="footer">
+      <div>Feito com carinho para Sarah 💖</div>
     </footer>
   </div>
 
-  <!-- modal -->
   <div id="modal" class="modal" aria-hidden="true">
     <div class="modal-box" role="dialog" aria-modal="true">
       <button id="modalClose" class="modal-close" aria-label="Fechar">✕</button>
       <img id="modalImg" src="" alt="">
-      <p id="modalCaption"></p>
+      <p id="modalCaption" class="muted"></p>
     </div>
   </div>
 
