@@ -24,7 +24,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const themeToggle = document.getElementById("themeToggle");
   const showQRBtn = document.getElementById("showQR");
   const qrcodeEl = document.getElementById("qrcode");
-  const embedToggle = document.getElementById("embedToggle");
   const spotifyEmbed = document.getElementById("spotifyEmbed");
 
   // frases e mensagens
@@ -49,7 +48,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // helpers
   function pad(n){ return String(n).padStart(2,"0"); }
 
-  // calcula anos, meses, dias, horas, min, seg entre duas datas
   function computeYMDHMS(from, to){
     let y = to.getFullYear() - from.getFullYear();
     let m = to.getMonth() - from.getMonth();
@@ -72,9 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return { years: y, months: m, days: d, hours: hh, minutes: mm, seconds: ss };
   }
 
-  // --- timers ---
-
-  // tempo total juntos: dias corridos + relógio
+  // timers
   function updateTotalTime(){
     const now = new Date();
     const diff = now - START;
@@ -84,10 +80,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const seconds = Math.floor((diff / 1000) % 60);
 
     totalDaysEl.textContent = `${totalDays} dias juntos`;
-    detailedTimeEl.textContent = `${computeYMDHMS(START, now).years} anos • ${computeYMDHMS(START, now).months} meses • ${computeYMDHMS(START, now).days} dias • ${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+    const t = computeYMDHMS(START, now);
+    detailedTimeEl.textContent = `${t.years} anos • ${t.months} meses • ${t.days} dias • ${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
   }
 
-  // próximo dia 4 do mês
   function nextDay4Reference(now){
     let year = now.getFullYear();
     let month = now.getMonth();
@@ -123,13 +119,11 @@ document.addEventListener("DOMContentLoaded", () => {
     monthProgressEl.style.width = percent + "%";
   }
 
-  // contagem para reencontro
   function updateReunionCountdown(){
     const now = new Date();
     const diff = REUNION - now;
     if (diff <= 0){
       reunionCountdownEl.textContent = "Ela chegou 💗";
-      // burst pequeno de corações
       spawnManyHearts(30, 3000);
       return;
     }
@@ -140,8 +134,8 @@ document.addEventListener("DOMContentLoaded", () => {
     reunionCountdownEl.textContent = `${pad(days)}d ${pad(hours)}h ${pad(minutes)}m ${pad(seconds)}s`;
   }
 
-  // --- mensagem do dia automática ---
-  function getTodayKey(){ // YYYY-MM-DD
+  // daily message
+  function getTodayKey(){
     const d = new Date();
     return d.getFullYear() + "-" + pad(d.getMonth()+1) + "-" + pad(d.getDate());
   }
@@ -156,7 +150,6 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // pick an index different from yesterday if possible
     let idx = Math.floor(Math.random() * dailyPhrases.length);
     if (storedIndex >= 0 && dailyPhrases.length > 1){
       while (idx === storedIndex) idx = Math.floor(Math.random() * dailyPhrases.length);
@@ -169,7 +162,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   newDailyBtn.addEventListener("click", ()=> setDailyMessage(true));
 
-  // --- mensagens aleatórias e ações ---
+  // random messages and actions
   randomMsgBtn.addEventListener("click", ()=> {
     randomMsgEl.textContent = phrases[Math.floor(Math.random()*phrases.length)];
   });
@@ -186,18 +179,17 @@ document.addEventListener("DOMContentLoaded", () => {
       setTimeout(()=> el.remove(), 2200 + Math.random()*900);
     }
   }
+
   document.getElementById("randomMsg").textContent = phrases[0];
   document.getElementById("randomMsgBtn").addEventListener("click", ()=> randomMsgEl.textContent = phrases[Math.floor(Math.random()*phrases.length)]);
 
-  kissBtn.addEventListener("click", ()=> spawnFloating("😘", 3));
-  hugBtn.addEventListener("click", ()=> spawnFloating("🤗", 3));
+  document.getElementById("kissBtn").addEventListener("click", ()=> spawnFloating("😘", 3));
+  document.getElementById("hugBtn").addEventListener("click", ()=> spawnFloating("🤗", 3));
 
-  // chuva infinita de corações (toggle)
+  // hearts toggle
   let heartsInterval = null;
   function spawnManyHearts(count=5, lifespan=2000){
-    for (let i=0;i<count;i++){
-      spawnFloating("💘",1);
-    }
+    for (let i=0;i<count;i++) spawnFloating("💘",1);
   }
   toggleHeartsBtn.addEventListener("click", ()=>{
     if (heartsInterval){
@@ -210,7 +202,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // --- galeria modal ---
+  // gallery modal
   gallery.addEventListener("click", (e)=>{
     const img = e.target.closest("img");
     if(!img) return;
@@ -221,26 +213,23 @@ document.addEventListener("DOMContentLoaded", () => {
   modalClose.addEventListener("click", ()=> modal.setAttribute("aria-hidden","true"));
   modal.addEventListener("click", (ev)=> { if (ev.target === modal) modal.setAttribute("aria-hidden","true"); });
 
-  // --- theme auto/manual ---
+  // theme auto/manual
   function applyTheme(saved){
     if (saved === "dark"){ document.body.classList.add("dark"); return;}
     if (saved === "light"){ document.body.classList.remove("dark"); return;}
-    // automatic by hour
     const h = new Date().getHours();
     if (h >= 18 || h < 6) document.body.classList.add("dark");
     else document.body.classList.remove("dark");
   }
   const savedTheme = localStorage.getItem("vs_theme");
   applyTheme(savedTheme);
-
   themeToggle.addEventListener("click", ()=>{
     const isDark = document.body.classList.toggle("dark");
     localStorage.setItem("vs_theme", isDark ? "dark" : "light");
   });
 
-  // --- QR Code (Spotify link) ---
+  // QR Code (Spotify)
   const spotifyLink = "https://open.spotify.com/track/3KYlOzxN5xO7eEauO1VF06?si=d28c0866cc564af4";
-  // generate QR with colors matching theme
   function renderQR(){
     qrcodeEl.innerHTML = "";
     const isDark = document.body.classList.contains("dark");
@@ -254,28 +243,19 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
   renderQR();
+  showQRBtn.addEventListener("click", ()=> { renderQR(); qrcodeEl.scrollIntoView({behavior:"smooth",block:"center"}); });
 
-  showQRBtn.addEventListener("click", ()=> {
-    renderQR();
-    qrcodeEl.scrollIntoView({behavior:"smooth",block:"center"});
-  });
-
-  embedToggle.addEventListener("click", ()=> {
-    if (spotifyEmbed.style.display === "none") spotifyEmbed.style.display = "block";
-    else spotifyEmbed.style.display = "none";
-  });
-
-  // respawn QR color when theme change
+  // rerender QR when theme changes
   const observer = new MutationObserver(()=> renderQR());
   observer.observe(document.body, {attributes:true,attributeFilter:['class']});
 
-  // --- inicialização ---
+  // init
   function init(){
     updateTotalTime();
     updateNextCountdown();
     updateReunionCountdown();
     setDailyMessage(false);
-    // small visual pulse on detailedTime
+
     setInterval(()=> {
       const el = detailedTimeEl;
       el.style.transform = "scale(1.02)";
