@@ -15,7 +15,7 @@
     }
 
     *{box-sizing:border-box;margin:0;padding:0}
-    html,body{height:100%}
+    html,body{height:100%;overflow-x:hidden}
     body{
       font-family:'Montserrat',system-ui,-apple-system,'Segoe UI',Roboto,Arial;
       background:linear-gradient(180deg,var(--bg-1),var(--bg-2));
@@ -57,12 +57,6 @@
     mask-size:cover}
     .photo:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 14px 36px rgba(88,24,55,0.12)}
 
-    /* actions */
-    .actions .row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:12px}
-    button{background:linear-gradient(180deg,#ffd7e7,#ffb9d3);border:none;color:var(--text);padding:10px 14px;border-radius:10px;cursor:pointer;font-weight:600;transition:transform 160ms ease,box-shadow 160ms ease}
-    button:hover{transform:translateY(-4px);box-shadow:0 8px 18px rgba(88,24,55,0.08)}
-    .random-text{text-align:center;color:#7a2b4d;font-size:1rem;padding:8px 6px}
-
     /* footer */
     .footer{text-align:center;color:var(--muted);margin-top:8px;font-weight:600}
 
@@ -92,13 +86,11 @@
       .muted { font-size: 0.85rem; }
       .photo { width: 45%; min-width: 120px; }
       .photo img { height: 140px; }
-      .actions .row { gap: 8px; }
-      button { padding: 8px 12px; font-size: 0.9rem; }
-      .random-text { font-size: 0.9rem; }
     }
 
     @media (max-width: 480px) {
-      body { padding: 12px; }
+      body { padding: 8px; }
+      .frame { max-width: 100%; }
       .brand h1 { font-size: 1.2rem; padding: 6px 10px; }
       .card { padding: 12px; }
       .counters { gap: 8px; }
@@ -106,9 +98,6 @@
       .muted { font-size: 0.8rem; }
       .photo { width: 100%; min-width: 100px; }
       .photo img { height: 120px; }
-      .actions .row { flex-direction: column; align-items: center; gap: 6px; }
-      button { padding: 6px 10px; font-size: 0.85rem; }
-      .random-text { font-size: 0.85rem; padding: 6px 4px; }
       .footer { font-size: 0.9rem; }
     }
   </style>
@@ -178,16 +167,6 @@
         </div>
       </section>
 
-      <section class="card actions">
-        <h2>Ações</h2>
-        <div class="row">
-          <button id="randomMsgBtn">💌 Nova frase</button>
-          <button id="kissBtn">😘 Beijo</button>
-          <button id="hugBtn">🤗 Abraço</button>
-        </div>
-        <div id="randomMsg" class="random-text">Você é meu motivo favorito para sorrir.</div>
-      </section>
-
       <section id="qrcode-section" class="card">
         <h2>Compartilhe Nosso Amor</h2>
         <div id="qrcodeWrap" style="display:flex;gap:12px;align-items:center;justify-content:center;flex-direction:column">
@@ -231,10 +210,6 @@
       const dailyMessageEl = document.getElementById("dailyMessage");
       const newDailyBtn = document.getElementById("newDailyBtn");
       const toggleHeartsBtn = document.getElementById("toggleHearts");
-      const randomMsgBtn = document.getElementById("randomMsgBtn");
-      const randomMsgEl = document.getElementById("randomMsg");
-      const kissBtn = document.getElementById("kissBtn");
-      const hugBtn = document.getElementById("hugBtn");
       const gallery = document.getElementById("gallery");
       const modal = document.getElementById("modal");
       const modalImg = document.getElementById("modalImg");
@@ -246,18 +221,66 @@
       const spotifyEmbed = document.getElementById("spotifyEmbed");
 
       // frases e mensagens
-      const phrases = [
-        "Você é meu motivo favorito para sorrir.",
-        "Cada dia com você é um presente.",
-        "Seu abraço é meu lugar seguro.",
-        "A gente e o mundo, no mesmo ritmo.",
-        "Sorrio só de lembrar de você.",
-        "Meu amor cresce um pouco mais a cada dia.",
-        "Nosso tempo juntos é meu lugar favorito."
-      ];
-
       const dailyPhrases = [
         "Bom dia, meu amor. Que seu dia seja doce.",
         "Hoje penso em você sempre que respiro.",
         "Sorria, você é a minha melhor lembrança.",
-        "P
+        "Pequenos gestos, grande amor. Tenha um ótimo dia.",
+        "Que hoje sobre amor e abraços para nós."
+      ];
+
+      // helpers
+      function pad(n){ return String(n).padStart(2,"0"); }
+
+      function computeYMDHMS(from, to){
+        let y = to.getFullYear() - from.getFullYear();
+        let m = to.getMonth() - from.getMonth();
+        let d = to.getDate() - from.getDate();
+        let hh = to.getHours() - from.getHours();
+        let mm = to.getMinutes() - from.getMinutes();
+        let ss = to.getSeconds() - from.getSeconds();
+
+        if (ss < 0){ ss += 60; mm -= 1; }
+        if (mm < 0){ mm += 60; hh -= 1; }
+        if (hh < 0){ hh += 24; d -= 1; }
+
+        if (d < 0){
+          const prevMonthDays = new Date(to.getFullYear(), to.getMonth(), 0).getDate();
+          d += prevMonthDays;
+          m -= 1;
+        }
+        if (m < 0){ m += 12; y -= 1; }
+
+        return { years: y, months: m, days: d, hours: hh, minutes: mm, seconds: ss };
+      }
+
+      // timers
+      function updateTotalTime(){
+        const now = new Date();
+        const diff = now - START;
+        const totalDays = Math.floor(diff / (1000*60*60*24));
+        const hours = Math.floor((diff / (1000*60*60)) % 24);
+        const minutes = Math.floor((diff / (1000*60)) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+
+        totalDaysEl.textContent = `${totalDays} dias juntos`;
+        const t = computeYMDHMS(START, now);
+        detailedTimeEl.textContent = `${t.years} anos • ${t.months} meses • ${t.days} dias • ${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+      }
+
+      function nextDay4Reference(now){
+        let year = now.getFullYear();
+        let month = now.getMonth();
+        let candidate = new Date(year, month, 4, 0,0,0);
+        if (now.getDate() >= 4 && now >= candidate){
+          candidate = new Date(year, month + 1, 4, 0,0,0);
+        }
+        return candidate;
+      }
+
+      function updateNextCountdown(){
+        const now = new Date();
+        const candidate = nextDay4Reference(now);
+        const diff = candidate - now;
+        if (diff <= 0){
+          nextCountdownEl.textContent = "Hoje é dia 4 💘 Feliz mêsversário!";
