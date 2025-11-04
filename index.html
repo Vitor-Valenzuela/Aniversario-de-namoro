@@ -28,7 +28,7 @@
     }
 
     /* frame and header */
-    .frame{width:100%;max-width:1060px}
+    .frame{width:100%;max-width:1060px;overflow:hidden}
     .header{display:flex;align-items:center;justify-content:center;position:relative;margin-bottom:18px}
     .brand h1{font-family:'Pacifico',cursive;color:var(--accent);font-size:2rem;padding:10px 18px;border-radius:12px;background:linear-gradient(90deg,rgba(255,255,255,0.6),rgba(255,255,255,0.4));box-shadow:var(--shadow)}
     .tools{position:absolute;right:0;top:6px}
@@ -41,7 +41,7 @@
 
     /* counters */
     .counter-card h2{font-family:'Pacifico',cursive;color:var(--accent);margin-bottom:6px}
-    .big-time{font-size:1.15rem;font-weight:700;color:#9a2b57;background:linear-gradient(90deg,#fff6fb,#fff0f6);padding:12px 14px;border-radius:10px;display:inline-block;min-width:220px;text-align:center}
+    .big-time{font-size:1.15rem;font-weight:700;color:#9a2b57;background:linear-gradient(90deg,#fff6fb,#fff0f6);padding:12px 14px;border-radius:10px;display:block;width:100%;text-align:center}
     .muted{color:var(--muted);font-size:0.92rem;margin-top:8px}
 
     /* progress */
@@ -79,26 +79,26 @@
 
     /* Responsividade */
     @media (max-width: 768px) {
-      body { padding: 16px; }
+      body { padding: 8px; }
       .brand h1 { font-size: 1.5rem; padding: 8px 12px; }
       .counters { grid-template-columns: 1fr; gap: 10px; }
-      .big-time { font-size: 1rem; min-width: 180px; padding: 10px 12px; }
+      .big-time { font-size: 1rem; padding: 10px 12px; }
       .muted { font-size: 0.85rem; }
       .photo { width: 45%; min-width: 120px; }
       .photo img { height: 140px; }
     }
 
     @media (max-width: 480px) {
-      body { padding: 8px; }
+      body { padding: 2px; }
       .frame { max-width: 100%; }
-      .brand h1 { font-size: 1.2rem; padding: 6px 10px; }
-      .card { padding: 12px; }
-      .counters { gap: 8px; }
-      .big-time { font-size: 0.9rem; min-width: 150px; padding: 8px 10px; }
-      .muted { font-size: 0.8rem; }
-      .photo { width: 100%; min-width: 100px; }
-      .photo img { height: 120px; }
-      .footer { font-size: 0.9rem; }
+      .brand h1 { font-size: 1rem; padding: 4px 8px; }
+      .card { padding: 8px; }
+      .counters { gap: 6px; }
+      .big-time { font-size: 0.8rem; padding: 6px 8px; }
+      .muted { font-size: 0.75rem; }
+      .photo { width: 100%; min-width: 80px; }
+      .photo img { height: 100px; }
+      .footer { font-size: 0.8rem; }
     }
   </style>
 </head>
@@ -271,16 +271,4 @@
       function nextDay4Reference(now){
         let year = now.getFullYear();
         let month = now.getMonth();
-        let candidate = new Date(year, month, 4, 0,0,0);
-        if (now.getDate() >= 4 && now >= candidate){
-          candidate = new Date(year, month + 1, 4, 0,0,0);
-        }
-        return candidate;
-      }
-
-      function updateNextCountdown(){
-        const now = new Date();
-        const candidate = nextDay4Reference(now);
-        const diff = candidate - now;
-        if (diff <= 0){
-          nextCountdownEl.textContent = "Hoje é dia 4 💘 Feliz mêsversário!";
+        let candidate = new Date(year, month,
