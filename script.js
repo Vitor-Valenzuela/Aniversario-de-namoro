@@ -1,4 +1,6 @@
-// --- Configurações iniciais e variáveis globais ---
+// ================================
+// CONFIGURAÇÕES INICIAIS
+// ================================
 const startDate = new Date("2024-10-04T00:00:00");
 
 const messages = [
@@ -17,9 +19,11 @@ const randomMessageEl = document.getElementById("randomMessage");
 const mainHeart = document.getElementById("mainHeart");
 const secretMessageBtn = document.getElementById("secretMessageBtn");
 const secretMessage = document.getElementById("secretMessage");
-const heartEffect = document.getElementById("heartEffect");
+const themeBtn = document.getElementById("toggleThemeBtn");
 
-// --- Função: Atualiza o Timer do amor ---
+// ================================
+// FUNÇÕES DE TEMPO
+// ================================
 function updateTimer() {
   const now = new Date();
   const diff = now - startDate;
@@ -37,13 +41,10 @@ function updateTimer() {
   `;
 }
 
-// --- Função: Atualiza o Countdown para o próximo mêsversário ---
 function updateCountdown() {
   const now = new Date();
   let next = new Date(now.getFullYear(), now.getMonth(), 4);
-  if (now.getDate() >= 4) {
-    next = new Date(now.getFullYear(), now.getMonth() + 1, 4);
-  }
+  if (now.getDate() >= 4) next = new Date(now.getFullYear(), now.getMonth() + 1, 4);
 
   const diff = next - now;
   const totalPeriod = next - new Date(now.getFullYear(), now.getMonth() - 1, 4);
@@ -66,24 +67,26 @@ function updateCountdown() {
   progressEl.style.width = progressPercent + "%";
 }
 
-// --- Função: Mostra mensagem aleatória ---
+// ================================
+// MENSAGENS E EFEITOS
+// ================================
 function showRandomMessage() {
   const msg = messages[Math.floor(Math.random() * messages.length)];
   randomMessageEl.textContent = msg;
+  randomMessageEl.classList.add("pulse");
+  setTimeout(() => randomMessageEl.classList.remove("pulse"), 700);
 }
 
-// --- Função: Cria emoji animado flutuante ---
 function spawnEmoji(emoji, className) {
   const elem = document.createElement("div");
   elem.className = className;
   elem.textContent = emoji;
   elem.style.left = Math.random() * 100 + "vw";
-  elem.style.top = Math.random() * 100 + "vh";
+  elem.style.animationDuration = 1.5 + Math.random() + "s";
   document.body.appendChild(elem);
-  setTimeout(() => elem.remove(), 2000);
+  setTimeout(() => elem.remove(), 2500);
 }
 
-// --- Função: Gera estrelas para efeito noturno ---
 function generateStars() {
   for (let i = 0; i < 60; i++) {
     const star = document.createElement("div");
@@ -94,82 +97,80 @@ function generateStars() {
   }
 }
 
-// --- Função: Traduz texto usando API funtranslations ---
+// ================================
+// TRADUTOR FOFO
+// ================================
 function traduzir(texto, idioma) {
+  const saida = document.getElementById("translatedMessage");
+
   if (!texto.trim()) {
-    document.getElementById("translatedMessage").textContent = "Por favor, digite uma frase para traduzir.";
+    saida.textContent = "Digite uma frase primeiro 💌";
     return;
   }
 
   const url = `https://api.funtranslations.com/translate/${idioma}.json?text=${encodeURIComponent(texto)}`;
 
   fetch(url)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error("Erro na tradução, talvez limite de requisições grátis.");
-      }
-      return response.json();
+    .then(r => {
+      if (!r.ok) throw new Error("Erro na tradução");
+      return r.json();
     })
     .then(data => {
-      const traduzido = data.contents.translated;
-      document.getElementById("translatedMessage").textContent = traduzido;
+      saida.textContent = data.contents.translated;
     })
-    .catch(error => {
-      console.error(error);
-      document.getElementById("translatedMessage").textContent = "Ops! Não consegui traduzir. Talvez tenha atingido o limite grátis.";
+    .catch(() => {
+      saida.textContent = "Limite da tradução atingido 😅";
     });
 }
 
-// --- Inicializações e event listeners ---
-
-// Atualiza timers a cada segundo
+// ================================
+// EVENTOS
+// ================================
 setInterval(updateTimer, 1000);
 updateTimer();
-
 setInterval(updateCountdown, 1000);
 updateCountdown();
 
-// Botões mensagens aleatórias e emojis
 document.getElementById("newMessageBtn").addEventListener("click", showRandomMessage);
 document.getElementById("sendKissBtn").addEventListener("click", () => spawnEmoji("😘", "kiss"));
 document.getElementById("sendHugBtn").addEventListener("click", () => spawnEmoji("🤗", "hug"));
 mainHeart.addEventListener("click", () => spawnEmoji("💖", "hug"));
 
-// Botões borboletas e estrelas
 document.getElementById("butterflyBtn").addEventListener("click", () => {
   for (let i = 0; i < 20; i++) spawnEmoji("🦋", "butterfly");
 });
+
 document.getElementById("starsBtn").addEventListener("click", () => {
   for (let i = 0; i < 30; i++) spawnEmoji("🌟", "star");
 });
 
-// Botão mensagem secreta
 secretMessageBtn.addEventListener("click", () => {
   secretMessage.classList.toggle("show");
 });
 
-// Efeito coração pulsante
-heartEffect.addEventListener("click", () => {
-  heartEffect.classList.toggle("active");
+document.getElementById("translateMinion").addEventListener("click", () => {
+  traduzir(document.getElementById("inputText").value, "minion");
+});
+document.getElementById("translateYoda").addEventListener("click", () => {
+  traduzir(document.getElementById("inputText").value, "yoda");
+});
+document.getElementById("translateElfo").addEventListener("click", () => {
+  traduzir(document.getElementById("inputText").value, "elf");
 });
 
-// Efeito noturno com estrelas
-const hour = new Date().getHours();
-if (hour >= 18 || hour <= 6) {
+// ================================
+// MODO NOTURNO AUTOMÁTICO + BOTÃO DE TEMA
+// ================================
+if (new Date().getHours() >= 18 || new Date().getHours() <= 6) {
   document.body.classList.add("night");
   generateStars();
 }
 
-// Tradução - botões
-document.getElementById("translateMinion").addEventListener("click", () => {
-  const texto = document.getElementById("inputText").value;
-  traduzir(texto, "minion");
-});
-document.getElementById("translateYoda").addEventListener("click", () => {
-  const texto = document.getElementById("inputText").value;
-  traduzir(texto, "yoda");
-});
-document.getElementById("translateElfo").addEventListener("click", () => {
-  const texto = document.getElementById("inputText").value;
-  traduzir(texto, "elf");
+themeBtn.addEventListener("click", () => {
+  document.body.classList.toggle("night");
+  if (document.body.classList.contains("night")) {
+    generateStars();
+  } else {
+    document.querySelectorAll(".star").forEach(e => e.remove());
+  }
 });
