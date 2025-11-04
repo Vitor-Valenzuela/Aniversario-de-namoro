@@ -1,94 +1,91 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Para Sarah 💖</title>
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <title>Vitor & Sarah — Nosso Tempo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Pacifico&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-  <button id="secretMessageBtn">💝 Mensagem Secreta</button>
-  <div id="secretMessage" class="hidden">Você é meu presente diário, meu amor! 💖</div>
+  <div class="page">
 
-  <header>
-    <h1>Sarah 💖</h1>
-    <p class="subtitle">Meu amor, minha inspiração, meu tudo ✨</p>
-  </header>
-
-  <main>
-    <section class="welcome fade-in">
-      <h2>🌸 Bem-vinda, amor da minha vida!</h2>
-      <p>Essa página é feita todinha pra você, que ilumina meu mundo e meu coração. 💫</p>
-    </section>
-
-    <section class="timer-section fade-in">
-      <h2>❤️ Nosso amor dura:</h2>
-      <div id="timer">Carregando...</div>
-    </section>
-
-    <section class="countdown-section fade-in">
-      <h2>⏳ Faltam...</h2>
-      <div id="countdown">Carregando...</div>
-      <div class="progress-bar"><div id="progress"></div></div>
-    </section>
-
-    <section id="translator" class="fade-in">
-      <h1>Tradutor Fofo 💕</h1>
-      <input type="text" id="inputText" placeholder="Digite sua frase aqui...">
-      <div class="buttons">
-        <button id="translateMinion">Minion 🐵</button>
-        <button id="translateYoda">Yoda 🧙‍♂️</button>
-        <button id="translateElfo">Elfo 🧝‍♂️</button>
+    <header class="topbar">
+      <div class="title">
+        <h1>Vitor & Sarah</h1>
+        <p class="tag">Desde 04/10/2024</p>
       </div>
-      <div id="translatedMessage"></div>
-    </section>
-
-    <section class="message-section fade-in">
-      <p id="randomMessage">Você é a coisa mais linda que já me aconteceu. 🌹</p>
-      <div class="buttons">
-        <button id="newMessageBtn">💌 Nova frase</button>
-        <button id="sendKissBtn">😘 Enviar Beijo</button>
-        <button id="sendHugBtn">🤗 Enviar Abraço</button>
+      <div class="controls">
+        <button id="themeToggle" aria-label="Alternar tema">🌗</button>
       </div>
-    </section>
+    </header>
 
-    <section class="heart-section fade-in">
-      <div id="mainHeart">❤️</div>
-    </section>
+    <main>
+      <section class="card counters">
+        <div class="counter">
+          <h2>Tempo juntos</h2>
+          <div id="loveTimer" class="bigtime">00d 00h 00m 00s</div>
+          <p class="hint">Dias, horas, minutos e segundos desde 04/10/2024</p>
+        </div>
 
-    <section class="gallery-section fade-in">
-      <h2>📸 Nossos Momentos</h2>
-      <div class="gallery">
-        <img src="./WhatsApp Image 2025-04-04 at 14.49.26 (1).jpeg" alt="Nós sorrindo juntos" class="heart-image">
-        <img src="./WhatsApp Image 2025-04-04 at 14.37.58.jpeg" alt="Sorrisos compartilhados" class="heart-image">
-        <img src="./WhatsApp Image 2025-04-04 at 14.49.26.jpeg" alt="Momentos felizes" class="heart-image">
-      </div>
-    </section>
+        <div class="counter">
+          <h2>Próximo mêsversário</h2>
+          <div id="nextCountdown" class="bigtime">Carregando...</div>
+          <div class="progress-wrap" aria-hidden="true">
+            <div id="monthProgress" class="progress"></div>
+          </div>
+          <p class="hint">Mêsversário dia 4 de cada mês</p>
+        </div>
+      </section>
 
-    <section class="dreams-section fade-in">
-      <h2>🌈 Nossos Sonhos</h2>
-      <ul>
-        <li>Viajar o mundo de mãos dadas ✈️💑</li>
-        <li>Ter nossa casinha dos sonhos 🏡💖</li>
-        <li>Adotar um pet fofo 🐶🐱</li>
-        <li>Celebrar todos os dias nosso amor 🎉💘</li>
-      </ul>
-    </section>
+      <section class="card moments">
+        <h2>Nossos Momentos</h2>
+        <p class="hint">Toque na foto para ampliar</p>
+        <div class="gallery" id="gallery">
+          <figure class="photo">
+            <img src="./WhatsApp Image 2025-04-04 at 14.49.26 (1).jpeg" alt="Nós sorrindo juntos" data-caption="Sorriso seu que eu amo">
+            <figcaption>Praça, risos e sol</figcaption>
+          </figure>
 
-    <section class="surprise-section fade-in">
-      <h2>✨ Surpresinhas!</h2>
-      <button id="butterflyBtn">🦋 Soltar Borboletas</button>
-      <button id="starsBtn">🌟 Chuva de Estrelas</button>
-      <button id="toggleThemeBtn">🌗 Mudar Tema</button>
-    </section>
-  </main>
+          <figure class="photo">
+            <img src="./WhatsApp Image 2025-04-04 at 14.37.58.jpeg" alt="Sorrisos compartilhados" data-caption="Dia inesquecível">
+            <figcaption>Noite de pizza e filme</figcaption>
+          </figure>
 
-  <footer>
-    <p>💖 Feito com muito amor para Sarah — Te amo pra sempre 💖</p>
-  </footer>
+          <figure class="photo">
+            <img src="./WhatsApp Image 2025-04-04 at 14.49.26.jpeg" alt="Momentos felizes" data-caption="Nosso abraço preferido">
+            <figcaption>Abraço apertado</figcaption>
+          </figure>
+        </div>
+      </section>
 
-  <script src="script.js"></script>
+      <section class="card actions">
+        <h2>Ações fofas</h2>
+        <div class="row">
+          <button id="randomMsgBtn">💌 Nova frase</button>
+          <button id="kissBtn">😘 Enviar beijo</button>
+          <button id="hugBtn">🤗 Enviar abraço</button>
+          <button id="butterfliesBtn">🦋 Borboletas</button>
+        </div>
+        <p id="randomMsg" class="random-text">Você é meu motivo favorito para sorrir.</p>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <small>Feito com carinho para Sarah. Te amo.</small>
+    </footer>
+
+  </div>
+
+  <!-- Modal de imagem -->
+  <div id="modal" class="modal" aria-hidden="true">
+    <div class="modal-content">
+      <button id="modalClose" class="modal-close" aria-label="Fechar">✕</button>
+      <img id="modalImg" src="" alt="">
+      <p id="modalCaption"></p>
+    </div>
+  </div>
+
+  <script src="script.js" defer></script>
 </body>
 </html>
