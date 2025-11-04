@@ -1,296 +1,204 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🌷 Flor de Namoro 🌷</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>💞 Flor de Namoro 💞</title>
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
   <style>
     body {
       font-family: "Poppins", sans-serif;
-      background: linear-gradient(135deg, #ffe6eb, #ffd6f3);
-      color: #4b004b;
+      background: linear-gradient(to bottom, #ffe3ec, #ffd6e0);
+      color: #4a0030;
+      text-align: center;
       margin: 0;
       padding: 0;
-      overflow-x: hidden;
       transition: background 0.5s, color 0.5s;
     }
-    body.dark {
-      background: linear-gradient(135deg, #1a001a, #330033);
-      color: #f8e6f8;
-    }
+
     header {
-      text-align: center;
       padding: 20px;
     }
+
     h1 {
-      font-size: 2.3em;
-      margin-bottom: 0;
+      font-size: 2.2rem;
+      color: #b30059;
     }
-    p {
-      margin-top: 0;
+
+    .sub {
+      color: #7a0043;
+      font-size: 0.95rem;
     }
-    .section {
-      padding: 20px;
-      text-align: center;
+
+    section {
+      margin: 30px auto;
+      width: 85%;
+      max-width: 800px;
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: 0 0 15px rgba(255, 182, 193, 0.4);
+      backdrop-filter: blur(3px);
     }
-    #totalTime, #nextCountdown, #reunionCountdown {
-      font-size: 1.2em;
-      font-weight: bold;
-    }
-    #monthProgress {
-      height: 10px;
-      width: 80%;
-      background-color: #ffc0cb;
-      border-radius: 10px;
-      margin: 10px auto;
-      overflow: hidden;
-      position: relative;
-    }
-    #monthProgress .bar {
-      background-color: #ff4b8b;
-      height: 100%;
-      width: 0;
-      border-radius: 10px;
-      transition: width 0.5s ease;
-    }
-    .controls button {
-      background-color: #ff8ccf;
+
+    button {
+      background: linear-gradient(90deg, #ff8fb1, #ffb6c1);
+      color: white;
       border: none;
-      border-radius: 12px;
-      padding: 10px 18px;
-      margin: 5px;
+      padding: 10px 25px;
+      border-radius: 25px;
       cursor: pointer;
-      font-weight: bold;
-      transition: transform 0.2s;
+      margin-top: 15px;
+      transition: all 0.3s ease;
+      font-weight: 600;
     }
-    .controls button:hover {
-      transform: scale(1.1);
+
+    button:hover {
+      transform: scale(1.05);
+      background: linear-gradient(90deg, #ff7aa2, #ffa2b8);
     }
+
+    .music-section {
+      text-align: center;
+      background: rgba(255, 182, 193, 0.3);
+      padding: 25px;
+      border-radius: 20px;
+      width: 85%;
+      margin: 30px auto;
+      box-shadow: 0 0 15px rgba(255, 192, 203, 0.4);
+      backdrop-filter: blur(4px);
+    }
+
+    .music-section h2 {
+      color: #b23a5a;
+      font-size: 1.6rem;
+      margin-bottom: 15px;
+      font-weight: 700;
+    }
+
+    .music-player {
+      overflow: hidden;
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(255, 0, 100, 0.3);
+      margin-bottom: 15px;
+    }
+
+    #qrcode {
+      margin-top: 15px;
+    }
+
+    footer {
+      font-size: 0.9rem;
+      margin-top: 40px;
+      color: #6b003a;
+      opacity: 0.8;
+    }
+
+    /* Corações flutuantes */
     .float-thing {
       position: fixed;
-      font-size: 22px;
-      animation: floatUp 2.6s linear forwards;
+      bottom: 0;
+      font-size: 24px;
+      animation: floatUp 3s ease-in-out forwards;
+      z-index: 999;
+      pointer-events: none;
     }
+
     @keyframes floatUp {
-      0% {transform: translateY(0) scale(1); opacity: 1;}
-      100% {transform: translateY(-100vh) scale(0.6); opacity: 0;}
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
     }
-    #gallery img {
-      width: 120px;
-      border-radius: 15px;
-      margin: 5px;
-      cursor: pointer;
-      transition: transform 0.3s;
+
+    /* Tema escuro */
+    .dark {
+      background: linear-gradient(to bottom, #2b002b, #3a003a);
+      color: #ffd1dc;
     }
-    #gallery img:hover {
-      transform: scale(1.1);
-    }
-    #modal {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.7);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      visibility: hidden;
-    }
-    #modal[aria-hidden="false"] {
-      visibility: visible;
-    }
-    #modal img {
-      width: 90%;
-      max-width: 500px;
-      border-radius: 15px;
-    }
-    #modal span {
-      position: absolute;
-      top: 10px; right: 20px;
-      font-size: 2em;
-      color: white;
-      cursor: pointer;
-    }
-    #qrcode {
-      margin-top: 10px;
-    }
-    iframe {
-      margin-top: 15px;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+
+    .dark section {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffe6f0;
     }
   </style>
-  <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
 </head>
 <body>
   <header>
     <h1>💞 Flor de Namoro 💞</h1>
-    <p>Vitor & Sarah — juntos desde 04/10/2024 🌷</p>
+    <p class="sub">Vitor & Sarah — juntos desde 04/10/2024 🌷</p>
   </header>
 
-  <section class="section">
-    <div id="totalTime"></div>
-    <div id="monthProgress"><div class="bar"></div></div>
-    <div id="nextCountdown"></div>
-    <div id="reunionCountdown"></div>
-  </section>
-
-  <section class="section">
+  <!-- Mensagem do dia -->
+  <section>
     <h2>💌 Mensagem do Dia</h2>
-    <p id="dailyMessage"></p>
-    <button id="newDailyBtn">↻ Nova Mensagem</button>
+    <p id="dailyMessage">Carregando mensagem...</p>
+    <button id="newDailyBtn">🔁 Nova Mensagem</button>
   </section>
 
-  <section class="section">
+  <!-- Nossa música -->
+  <section class="music-section">
     <h2>🎧 Nossa Música</h2>
-    <!-- Player Spotify incorporado -->
-    <iframe style="border-radius:12px"
-      src="https://open.spotify.com/embed/track/3KYlOzxN5xO7eEauO1VF06?utm_source=generator"
-      width="100%" height="352" frameborder="0"
-      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-      loading="lazy"></iframe>
-    <br>
+    <div class="music-player">
+      <iframe
+        style="border-radius: 16px;"
+        src="https://open.spotify.com/embed/track/3KYlOzxN5xO7eEauO1VF06?utm_source=generator"
+        width="100%"
+        height="352"
+        frameborder="0"
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy">
+      </iframe>
+    </div>
     <button id="showQRBtn">📱 Mostrar QR Code da Música</button>
     <div id="qrcode"></div>
   </section>
 
-  <section class="section controls">
-    <button id="toggleHeartsBtn">💞 Amor sem fim</button>
+  <!-- Botões especiais -->
+  <div style="margin: 30px;">
+    <button id="toggleHeartsBtn">💗 Amor sem fim</button>
     <button id="themeToggle">🌗 Tema</button>
-  </section>
+  </div>
+
+  <footer>
+    <p>💖 Feito com amor por Vitor Alex 💖</p>
+  </footer>
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      const START_DATE = new Date("2024-10-04T00:00:00");
-      const REUNION = new Date("2025-12-25T00:00:00");
-
-      const totalTimeEl = document.getElementById("totalTime");
-      const monthProgressEl = document.querySelector("#monthProgress .bar");
-      const nextCountdownEl = document.getElementById("nextCountdown");
-      const reunionCountdownEl = document.getElementById("reunionCountdown");
       const dailyMessageEl = document.getElementById("dailyMessage");
-      const gallery = document.getElementById("gallery");
-      const modal = document.getElementById("modal");
-      const modalImg = document.getElementById("modalImg");
-      const modalClose = document.getElementById("modalClose");
-      const modalCaption = document.getElementById("modalCaption");
-      const themeToggle = document.getElementById("themeToggle");
-      const toggleHeartsBtn = document.getElementById("toggleHeartsBtn");
-      const showQRBtn = document.getElementById("showQRBtn");
       const qrcodeEl = document.getElementById("qrcode");
+      const showQRBtn = document.getElementById("showQRBtn");
+      const toggleHeartsBtn = document.getElementById("toggleHeartsBtn");
+      const themeToggle = document.getElementById("themeToggle");
 
-      const dailyPhrases = [
-        "Amar é encontrar no outro o lar. 💕",
-        "Cada batida do meu coração leva seu nome. 💖",
-        "Nada é mais bonito que o nosso jeito de sorrir juntos. 🌷",
-        "Você é minha certeza em meio a tudo. 💞",
-        "Se fosse pra escolher de novo, eu escolheria você. 💗"
+      const messages = [
+        "Você é o meu lugar favorito no mundo 💕",
+        "Com você, cada dia é mais bonito 🌸",
+        "Nada é por acaso, inclusive nós 💞",
+        "O amor é mais doce quando é com você 🍯",
+        "Você é o meu destino mais bonito ✨",
+        "Mesmo longe, você está em tudo o que eu vejo 💌",
       ];
 
-      const pad = (num) => num.toString().padStart(2, "0");
-
-      const updateTotalTime = () => {
-        const now = new Date();
-        const diff = now - START_DATE;
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-        const minutes = Math.floor((diff / (1000 * 60)) % 60);
-        totalTimeEl.textContent = `🌸 Juntos há ${days} dias, ${hours}h${pad(minutes)}m`;
-      };
-
-      const nextDay4Reference = (now) => {
-        let year = now.getFullYear();
-        let month = now.getMonth();
-        let candidate = new Date(year, month, 4);
-        if (now.getDate() >= 4) {
-          month++;
-          if (month > 11) { month = 0; year++; }
-          candidate = new Date(year, month, 4);
-        }
-        return candidate;
-      };
-
-      const updateMonthProgress = () => {
-        const now = new Date();
-        const next = nextDay4Reference(now);
-        const last = new Date(next.getFullYear(), next.getMonth() - 1, 4);
-        const total = next - last;
-        const elapsed = now - last;
-        const progress = Math.min(100, Math.max(0, (elapsed / total) * 100));
-        monthProgressEl.style.width = `${progress}%`;
-
-        const diffMs = next - now;
-        const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-        const diffHours = Math.floor((diffMs / (1000 * 60 * 60)) % 24);
-        const diffMinutes = Math.floor((diffMs / (1000 * 60)) % 60);
-        nextCountdownEl.textContent = `💞 Próximo mêsversário em ${diffDays}d ${pad(diffHours)}:${pad(diffMinutes)}`;
-      };
-
-      const updateReunionCountdown = () => {
-        const now = new Date();
-        const diffMs = REUNION - now;
-        if (diffMs <= 0) {
-          reunionCountdownEl.textContent = "🎄 O reencontro chegou 💖";
-          return;
-        }
-        const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-        const diffHours = Math.floor((diffMs / (1000 * 60 * 60)) % 24);
-        const diffMinutes = Math.floor((diffMs / (1000 * 60)) % 60);
-        reunionCountdownEl.textContent = `⏳ Reencontro em ${diffDays}d ${pad(diffHours)}:${pad(diffMinutes)}`;
-      };
-
+      // Mensagem do dia
       const getDailyMessage = () => {
         const today = new Date().toDateString();
-        const stored = localStorage.getItem("dailyMsg");
-        const storedDate = localStorage.getItem("dailyDate");
-        if (stored && storedDate === today) return stored;
-        const msg = dailyPhrases[Math.floor(Math.random() * dailyPhrases.length)];
+        if (localStorage.getItem("dailyDate") === today) {
+          return localStorage.getItem("dailyMsg");
+        }
+        const msg = messages[Math.floor(Math.random() * messages.length)];
         localStorage.setItem("dailyMsg", msg);
         localStorage.setItem("dailyDate", today);
         return msg;
       };
-      const refreshDailyMessage = () => { dailyMessageEl.textContent = getDailyMessage(); };
+      const refreshDailyMessage = () => {
+        dailyMessageEl.textContent = getDailyMessage();
+      };
       document.getElementById("newDailyBtn").addEventListener("click", () => {
         localStorage.removeItem("dailyDate");
         refreshDailyMessage();
       });
 
-      // Galeria
-      gallery.addEventListener("click", (e) => {
-        const img = e.target.closest("img");
-        if (!img) return;
-        modalImg.src = img.src;
-        modalCaption.textContent = img.dataset.caption || "";
-        modal.setAttribute("aria-hidden", "false");
-      });
-      modalClose.addEventListener("click", () => modal.setAttribute("aria-hidden", "true"));
-      modal.addEventListener("click", (e) => { if (e.target === modal) modal.setAttribute("aria-hidden", "true"); });
-
-      // Tema
-      themeToggle.addEventListener("click", () => {
-        document.body.classList.toggle("dark");
-        localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark" : "light");
-      });
-      if (localStorage.getItem("theme") === "dark") document.body.classList.add("dark");
-
-      // Corações
-      let heartsActive = false;
-      const createHeart = () => {
-        if (!heartsActive) return;
-        const h = document.createElement("div");
-        h.className = "float-thing";
-        h.textContent = ["💖","💞","💓","💕"][Math.floor(Math.random() * 4)];
-        h.style.left = Math.random() * 100 + "vw";
-        h.style.top = "100vh";
-        document.body.appendChild(h);
-        setTimeout(() => h.remove(), 2600);
-      };
-      toggleHeartsBtn.addEventListener("click", () => {
-        heartsActive = !heartsActive;
-        toggleHeartsBtn.textContent = heartsActive ? "💗 Parar corações" : "💞 Amor sem fim";
-        if (heartsActive) setInterval(createHeart, 500);
-      });
-
-      // QR Música
+      // QR code da música
       showQRBtn.addEventListener("click", () => {
         qrcodeEl.innerHTML = "";
         new QRCode(qrcodeEl, {
@@ -299,19 +207,40 @@
           height: 140,
           colorDark: "#e84a7a",
           colorLight: "#fff",
-          correctLevel: QRCode.CorrectLevel.H
+          correctLevel: QRCode.CorrectLevel.H,
         });
       });
 
+      // Tema escuro
+      themeToggle.addEventListener("click", () => {
+        document.body.classList.toggle("dark");
+        localStorage.setItem(
+          "theme",
+          document.body.classList.contains("dark") ? "dark" : "light"
+        );
+      });
+      if (localStorage.getItem("theme") === "dark") {
+        document.body.classList.add("dark");
+      }
+
+      // Corações flutuantes
+      let heartsActive = false;
+      const createHeart = () => {
+        if (!heartsActive) return;
+        const h = document.createElement("div");
+        h.className = "float-thing";
+        h.textContent = ["💖", "💞", "💓", "💕"][Math.floor(Math.random() * 4)];
+        h.style.left = Math.random() * 100 + "vw";
+        document.body.appendChild(h);
+        setTimeout(() => h.remove(), 3000);
+      };
+      toggleHeartsBtn.addEventListener("click", () => {
+        heartsActive = !heartsActive;
+        toggleHeartsBtn.textContent = heartsActive ? "💗 Parar" : "💞 Amor sem fim";
+        if (heartsActive) setInterval(createHeart, 500);
+      });
+
       refreshDailyMessage();
-      updateTotalTime();
-      updateMonthProgress();
-      updateReunionCountdown();
-      setInterval(() => {
-        updateTotalTime();
-        updateMonthProgress();
-        updateReunionCountdown();
-      }, 1000);
     });
   </script>
 </body>
