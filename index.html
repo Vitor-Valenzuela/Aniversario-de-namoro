@@ -82,6 +82,35 @@
     body.dark .card{background:#151226}
     body.dark .big-time{background:linear-gradient(90deg,#24102a,#1a0713);color:#ffd7eb}
     body.dark .photo{background:rgba(255,255,255,0.02)}
+
+    /* Responsividade */
+    @media (max-width: 768px) {
+      body { padding: 16px; }
+      .brand h1 { font-size: 1.5rem; padding: 8px 12px; }
+      .counters { grid-template-columns: 1fr; gap: 10px; }
+      .big-time { font-size: 1rem; min-width: 180px; padding: 10px 12px; }
+      .muted { font-size: 0.85rem; }
+      .photo { width: 45%; min-width: 120px; }
+      .photo img { height: 140px; }
+      .actions .row { gap: 8px; }
+      button { padding: 8px 12px; font-size: 0.9rem; }
+      .random-text { font-size: 0.9rem; }
+    }
+
+    @media (max-width: 480px) {
+      body { padding: 12px; }
+      .brand h1 { font-size: 1.2rem; padding: 6px 10px; }
+      .card { padding: 12px; }
+      .counters { gap: 8px; }
+      .big-time { font-size: 0.9rem; min-width: 150px; padding: 8px 10px; }
+      .muted { font-size: 0.8rem; }
+      .photo { width: 100%; min-width: 100px; }
+      .photo img { height: 120px; }
+      .actions .row { flex-direction: column; align-items: center; gap: 6px; }
+      button { padding: 6px 10px; font-size: 0.85rem; }
+      .random-text { font-size: 0.85rem; padding: 6px 4px; }
+      .footer { font-size: 0.9rem; }
+    }
   </style>
 </head>
 <body>
@@ -231,58 +260,4 @@
         "Bom dia, meu amor. Que seu dia seja doce.",
         "Hoje penso em você sempre que respiro.",
         "Sorria, você é a minha melhor lembrança.",
-        "Pequenos gestos, grande amor. Tenha um ótimo dia.",
-        "Que hoje sobre amor e abraços para nós."
-      ];
-
-      // helpers
-      function pad(n){ return String(n).padStart(2,"0"); }
-
-      function computeYMDHMS(from, to){
-        let y = to.getFullYear() - from.getFullYear();
-        let m = to.getMonth() - from.getMonth();
-        let d = to.getDate() - from.getDate();
-        let hh = to.getHours() - from.getHours();
-        let mm = to.getMinutes() - from.getMinutes();
-        let ss = to.getSeconds() - from.getSeconds();
-
-        if (ss < 0){ ss += 60; mm -= 1; }
-        if (mm < 0){ mm += 60; hh -= 1; }
-        if (hh < 0){ hh += 24; d -= 1; }
-
-        if (d < 0){
-          const prevMonthDays = new Date(to.getFullYear(), to.getMonth(), 0).getDate();
-          d += prevMonthDays;
-          m -= 1;
-        }
-        if (m < 0){ m += 12; y -= 1; }
-
-        return { years: y, months: m, days: d, hours: hh, minutes: mm, seconds: ss };
-      }
-
-      // timers
-      function updateTotalTime(){
-        const now = new Date();
-        const diff = now - START;
-        const totalDays = Math.floor(diff / (1000*60*60*24));
-        const hours = Math.floor((diff / (1000*60*60)) % 24);
-        const minutes = Math.floor((diff / (1000*60)) % 60);
-        const seconds = Math.floor((diff / 1000) % 60);
-
-        totalDaysEl.textContent = `${totalDays} dias juntos`;
-        const t = computeYMDHMS(START, now);
-        detailedTimeEl.textContent = `${t.years} anos • ${t.months} meses • ${t.days} dias • ${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
-      }
-
-      function nextDay4Reference(now){
-        let year = now.getFullYear();
-        let month = now.getMonth();
-        let candidate = new Date(year, month, 4, 0,0,0);
-        if (now.getDate() >= 4 && now >= candidate){
-          candidate = new Date(year, month + 1, 4, 0,0,0);
-        }
-        return candidate;
-      }
-
-      function updateNextCountdown(){
-        const now = new Date();
+        "P
