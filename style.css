@@ -1,286 +1,232 @@
-/* Reset básico e corpo */
-body {
-    font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(to bottom, #ffe6f0, #ffeef7);
-    color: #7d2553;
-    text-align: center;
-    margin: 0;
-    padding: 40px 20px;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
-  
-  /* Títulos */
-  h1 {
-    font-family: 'Pacifico', cursive;
-    color: #e75480;
-    font-size: 3rem;
-    margin: 20px 0 5px;
-  }
-  
-  .subtitle {
-    font-size: 1.2rem;
-    color: #a43c6c;
-  }
-  
-  h2 {
-    font-family: 'Pacifico', cursive;
-    color: #e75480;
-  }
-  
-  /* Botões */
-  button {
-    background-color: #ffb6c1;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 25px;
-    font-size: 1rem;
-    cursor: pointer;
-    margin: 5px;
-    transition: transform 0.3s, background-color 0.3s;
-    color: #7d2553;
-    font-weight: 600;
-    min-width: 120px;
-  }
-  
-  button:hover {
-    background-color: #ff9fb2;
-    transform: scale(1.1);
-    color: #4b103a;
-  }
-  
-  /* Coração pulsante */
-  #mainHeart {
-    font-size: 5rem;
-    animation: pulse 1.5s infinite;
-    cursor: pointer;
-    display: inline-block;
-    margin: 15px 0;
-  }
-  
-  @keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.2); }
-    100% { transform: scale(1); }
-  }
-  
-  /* Seções principais */
-  .timer-section, 
-  .countdown-section, 
-  .message-section, 
-  .gallery-section, 
-  .dreams-section, 
-  .surprise-section,
-  section#translator {
-    background: white;
-    border-radius: 20px;
-    margin: 20px;
-    padding: 20px 30px;
-    box-shadow: 0 0 10px rgba(255, 192, 203, 0.5);
-    max-width: 600px;
-    width: 100%;
-  }
-  
-  /* Galeria */
-  .gallery img {
-    width: 30%;
-    border-radius: 20px;
-    margin: 10px;
-    box-shadow: 0 5px 15px rgba(255, 105, 180, 0.5);
-    transition: transform 0.3s;
-    cursor: pointer;
-  }
-  
-  .gallery img:hover {
-    transform: scale(1.05);
-  }
-  
-  /* Barra de progresso */
-  .progress-bar {
-    background-color: #ffeef7;
-    border-radius: 20px;
-    overflow: hidden;
-    margin: 10px auto;
-    width: 80%;
-    height: 20px;
-  }
-  
-  #progress {
-    background-color: #ff69b4;
-    height: 100%;
-    width: 0%;
-    transition: width 0.5s ease;
-    border-radius: 20px;
-  }
-  
-  /* Animações de elementos flutuantes (beijos, borboletas, estrelas) */
-  .kiss, .hug, .butterfly, .star {
-    position: fixed;
-    font-size: 2rem;
-    pointer-events: none;
-    animation: floatUp 2s ease forwards;
-    user-select: none;
-  }
-  
-  @keyframes floatUp {
-    0% { opacity: 1; transform: translateY(0) scale(1); }
-    100% { opacity: 0; transform: translateY(-150px) scale(0.8); }
-  }
-  
-  /* Rodapé */
-  footer {
-    background-color: #ffdce6;
-    padding: 10px;
-    font-family: 'Pacifico', cursive;
-    color: #a43c6c;
-    margin-top: 40px;
-  }
-  
-  /* Contadores de tempo */
-  #timer, #countdown {
-    font-family: 'Pacifico', cursive;
-    font-size: 1.8rem;
-    color: #e75480;
-    background-color: #fff0f5;
-    display: inline-block;
-    padding: 15px 25px;
-    border-radius: 25px;
-    box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
-    margin: 10px 0;
-  }
-  
-  /* Números destacados */
-  #timer span, 
-  #countdown span {
-    color: #ff4081;
-    font-weight: bold;
-    font-size: 2rem;
-  }
-  
-  /* Letras (d, h, m, s) com delicadeza */
-  #timer .label, 
-  #countdown .label {
-    color: #a43c6c;
-    margin: 0 2px;
-    font-size: 1.2rem;
-    font-weight: normal;
-  }
-  
-  /* Mensagem secreta */
-  #secretMessage {
-    display: none;
-    background-color: #ffe4ec;
-    border-radius: 20px;
-    padding: 15px 30px;
-    margin: 10px;
-    font-family: 'Pacifico', cursive;
-    font-size: 1.5rem;
-    box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
-  }
-  
-  #secretMessage.show {
-    display: block;
-  }
-  
-  /* Modo noturno */
-  body.night {
-    background: radial-gradient(#0a0a23, #000);
-  }
-  
-  /* Estrelas para modo noturno */
-  .star {
-    position: fixed;
-    width: 2px;
-    height: 2px;
-    background: white;
-    border-radius: 50%;
-    opacity: 0.8;
-    animation: twinkle 2s infinite ease-in-out;
-    pointer-events: none;
-  }
-  
-  @keyframes twinkle {
-    0%, 100% { opacity: 0.8; }
-    50% { opacity: 0.2; }
-  }
-  
-  /* Seção do tradutor fofo */
-  section#translator {
-    background: #ffe6f0;
-    border-radius: 15px;
-    padding: 30px;
-    max-width: 500px;
-    box-shadow: 0 8px 20px rgba(214, 51, 132, 0.3);
-    width: 100%;
-  }
-  
-  section#translator h1 {
-    font-family: 'Pacifico', cursive;
-    font-size: 2.8em;
-    margin-bottom: 25px;
-    color: #b20059;
-  }
-  
-  /* Input para o tradutor */
-  input[type="text"] {
-    padding: 12px 15px;
-    font-size: 1.1em;
-    border-radius: 8px;
-    border: 2px solid #d63384;
-    width: 100%;
-    box-sizing: border-box;
-    outline: none;
-    transition: border-color 0.3s ease;
-    margin-bottom: 20px;
-  }
-  
-  input[type="text"]:focus {
-    border-color: #ff69b4;
-    box-shadow: 0 0 8px #ff69b4;
-  }
-  
-  /* Botões do tradutor (dentro da seção) */
-  section#translator .buttons {
-    margin: 20px 0 10px;
-    display: flex;
-    justify-content: space-around;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-  
-  section#translator button {
-    flex: 1 1 30%;
-    background-color: #ff69b4;
-    border: none;
-    color: white;
-    font-weight: 600;
-    font-size: 1em;
-    padding: 12px 0;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    min-width: 120px;
-  }
-  
-  section#translator button:hover {
-    background-color: #b20059;
-  }
-  
-  /* Resultado do tradutor */
-  #translatedMessage {
-    font-family: 'Pacifico', cursive;
-    font-size: 1.3em;
-    margin-top: 25px;
-    color: #800040;
-    min-height: 90px;
-    padding: 15px 10px;
-    border: 2px dashed #d63384;
-    border-radius: 15px;
-    background: #fff0f6;
-    user-select: text;
-    white-space: pre-wrap;
-  }
-  
+:root{
+  --bg-1: #fff1f6;
+  --bg-2: #fff7fb;
+  --accent: #e84a7a;
+  --accent-2: #ff7fb0;
+  --text: #5a2138;
+  --card: #ffffff;
+  --glass: rgba(255,255,255,0.6);
+  --shadow: 0 8px 24px rgba(88,24,55,0.08);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  background: linear-gradient(180deg,var(--bg-1),var(--bg-2));
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:28px;
+}
+
+/* Layout */
+.page{
+  width:100%;
+  max-width:980px;
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+
+/* Topbar */
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.title h1{
+  font-family:'Pacifico', cursive;
+  font-size:1.9rem;
+  color:var(--accent);
+}
+.title .tag{
+  font-size:0.9rem;
+  color:#8b3a59;
+}
+
+/* Card comum */
+.card{
+  background:var(--card);
+  border-radius:14px;
+  padding:18px;
+  box-shadow:var(--shadow);
+}
+
+/* Counters */
+.counters{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+.counter h2{
+  font-family:'Pacifico', cursive;
+  color:var(--accent);
+  margin-bottom:8px;
+}
+.bigtime{
+  font-size:1.15rem;
+  font-weight:600;
+  color:#bb2f60;
+  background:linear-gradient(90deg,#fff6fb,#fff0f6);
+  padding:10px 12px;
+  border-radius:10px;
+  display:inline-block;
+  min-width:220px;
+  text-align:center;
+}
+
+/* progresso mensal */
+.progress-wrap{
+  margin-top:12px;
+  background: #fff0f5;
+  border-radius:999px;
+  height:10px;
+  width:100%;
+  overflow:hidden;
+}
+.progress{
+  height:100%;
+  width:0%;
+  background: linear-gradient(90deg,var(--accent),var(--accent-2));
+  transition:width 600ms ease;
+}
+
+/* Moments gallery */
+.moments .gallery{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  justify-content:center;
+  margin-top:12px;
+}
+.photo{
+  width:30%;
+  min-width:140px;
+  border-radius:12px;
+  overflow:hidden;
+  background:var(--glass);
+  box-shadow:0 6px 18px rgba(88,24,55,0.06);
+  cursor:pointer;
+  transition:transform 220ms ease, box-shadow 220ms ease;
+}
+.photo img{
+  width:100%;
+  height:160px;
+  object-fit:cover;
+  display:block;
+}
+.photo figcaption{
+  padding:8px;
+  font-size:0.9rem;
+  color:#7a2b4d;
+  text-align:left;
+}
+
+/* Hover */
+.photo:hover{
+  transform:translateY(-6px) scale(1.02);
+  box-shadow:0 12px 30px rgba(88,24,55,0.12);
+}
+
+/* Actions */
+.actions .row{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  justify-content:center;
+  margin-bottom:12px;
+}
+button{
+  background:linear-gradient(180deg,#ffd7e7,#ffb9d3);
+  border:none;
+  color:var(--text);
+  padding:10px 14px;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:600;
+  transition:transform 180ms ease, box-shadow 180ms ease;
+}
+button:hover{
+  transform:translateY(-4px);
+  box-shadow:0 8px 18px rgba(88,24,55,0.08);
+}
+.random-text{
+  margin-top:6px;
+  font-size:1rem;
+  color:#7a2b4d;
+}
+
+/* Footer */
+.foot{
+  text-align:center;
+  color:#7a2b4d;
+}
+
+/* Modal */
+.modal{
+  position:fixed;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(0,0,0,0.45);
+  padding:18px;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 200ms ease;
+}
+.modal[aria-hidden="false"]{
+  opacity:1;
+  pointer-events:auto;
+}
+.modal-content{
+  background:white;
+  max-width:880px;
+  width:100%;
+  border-radius:12px;
+  overflow:hidden;
+  padding:14px;
+  text-align:center;
+  box-shadow:0 20px 50px rgba(0,0,0,0.35);
+}
+.modal img{
+  max-height:70vh;
+  width:auto;
+  max-width:100%;
+  display:block;
+  margin:0 auto 8px;
+}
+.modal-close{
+  position:absolute;
+  top:18px;
+  right:18px;
+  background:transparent;
+  border:none;
+  font-size:1.05rem;
+  cursor:pointer;
+}
+
+/* Floating emojis */
+.float{
+  position:fixed;
+  font-size:1.8rem;
+  pointer-events:none;
+  animation:floatUp 2000ms ease forwards;
+}
+@keyframes floatUp{
+  from{transform:translateY(0) scale(1); opacity:1}
+  to{transform:translateY(-160px) scale(0.85); opacity:0}
+}
+
+/* Tema escuro */
+body.dark{
+  background: linear-gradient(180deg,#0f1022,#120616);
+  color:#f6e9ef;
+}
+body.dark .card{ background:#151226 }
+body.dark .bigtime{ background:linear-gradient(90deg,#24102a,#1a0713); color:#ffd7eb }
+body.dark .photo{ background:rgba(255,255,255,0.02) }
