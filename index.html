@@ -8,33 +8,33 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="page">
+  <div class="container">
 
     <header class="topbar">
       <div class="title">
         <h1>Vitor & Sarah</h1>
-        <p class="tag">Desde 04/10/2024</p>
+        <p class="since">Desde 04/10/2024</p>
       </div>
-      <div class="controls">
+      <div class="tools">
         <button id="themeToggle" aria-label="Alternar tema">🌗</button>
       </div>
     </header>
 
     <main>
       <section class="card counters">
-        <div class="counter">
+        <div class="block">
           <h2>Tempo juntos</h2>
-          <div id="loveTimer" class="bigtime">00d 00h 00m 00s</div>
-          <p class="hint">Dias, horas, minutos e segundos desde 04/10/2024</p>
+          <div id="loveTimer" class="time">00d 00h 00m 00s</div>
+          <p class="hint">Contador em tempo real desde 04/10/2024</p>
         </div>
 
-        <div class="counter">
+        <div class="block">
           <h2>Próximo mêsversário</h2>
-          <div id="nextCountdown" class="bigtime">Carregando...</div>
-          <div class="progress-wrap" aria-hidden="true">
+          <div id="nextCountdown" class="time">Carregando...</div>
+          <div class="progress-track" aria-hidden="true">
             <div id="monthProgress" class="progress"></div>
           </div>
-          <p class="hint">Mêsversário dia 4 de cada mês</p>
+          <p class="hint">Mêsversário no dia 4 de cada mês</p>
         </div>
       </section>
 
@@ -43,12 +43,12 @@
         <p class="hint">Toque na foto para ampliar</p>
         <div class="gallery" id="gallery">
           <figure class="photo">
-            <img src="./WhatsApp Image 2025-04-04 at 14.49.26 (1).jpeg" alt="Nós sorrindo juntos" data-caption="Sorriso seu que eu amo">
+            <img src="./WhatsApp Image 2025-04-04 at 14.49.26 (1).jpeg" alt="Nós sorrindo juntos" data-caption="Praça, risos e sol">
             <figcaption>Praça, risos e sol</figcaption>
           </figure>
 
           <figure class="photo">
-            <img src="./WhatsApp Image 2025-04-04 at 14.37.58.jpeg" alt="Sorrisos compartilhados" data-caption="Dia inesquecível">
+            <img src="./WhatsApp Image 2025-04-04 at 14.37.58.jpeg" alt="Sorrisos compartilhados" data-caption="Noite de pizza e filme">
             <figcaption>Noite de pizza e filme</figcaption>
           </figure>
 
@@ -60,11 +60,11 @@
       </section>
 
       <section class="card actions">
-        <h2>Ações fofas</h2>
+        <h2>Ações</h2>
         <div class="row">
           <button id="randomMsgBtn">💌 Nova frase</button>
-          <button id="kissBtn">😘 Enviar beijo</button>
-          <button id="hugBtn">🤗 Enviar abraço</button>
+          <button id="kissBtn">😘 Beijo</button>
+          <button id="hugBtn">🤗 Abraço</button>
           <button id="butterfliesBtn">🦋 Borboletas</button>
         </div>
         <p id="randomMsg" class="random-text">Você é meu motivo favorito para sorrir.</p>
@@ -74,12 +74,11 @@
     <footer class="foot">
       <small>Feito com carinho para Sarah. Te amo.</small>
     </footer>
-
   </div>
 
-  <!-- Modal de imagem -->
+  <!-- modal -->
   <div id="modal" class="modal" aria-hidden="true">
-    <div class="modal-content">
+    <div class="modal-box" role="dialog" aria-modal="true">
       <button id="modalClose" class="modal-close" aria-label="Fechar">✕</button>
       <img id="modalImg" src="" alt="">
       <p id="modalCaption"></p>
