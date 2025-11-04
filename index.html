@@ -49,7 +49,7 @@
           <div class="row" style="margin-top:10px;">
             <button id="newDailyBtn">↻ Nova (hoje)</button>
             <button id="toggleHearts">💞 Amor sem fim</button>
-            <button id="showQR">🎵 Música nossa</button>
+            <button id="showQR">🎵 Gerar QR</button>
           </div>
         </div>
       </section>
@@ -98,11 +98,9 @@
           <div id="qrcode" aria-hidden="true"></div>
           <a id="spotifyLink" href="https://open.spotify.com/track/3KYlOzxN5xO7eEauO1VF06?si=d28c0866cc564af4" target="_blank" rel="noopener" class="muted">Abrir música no Spotify</a>
         </div>
-        <div style="margin-top:12px; text-align:center">
-          <button id="embedToggle">▶ Ver player embutido</button>
-        </div>
-        <div id="spotifyEmbed" style="margin-top:12px; display:none;">
-          <iframe id="spotifyIframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/3KYlOzxN5xO7eEauO1VF06?utm_source=generator" width="100%" height="80" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+
+        <div id="spotifyEmbed" style="margin-top:16px;display:block">
+          <iframe id="spotifyIframe" style="border-radius:12px;box-shadow:0 8px 24px rgba(88,24,55,0.12)" src="https://open.spotify.com/embed/track/3KYlOzxN5xO7eEauO1VF06?utm_source=generator" width="100%" height="92" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
         </div>
       </section>
     </main>
