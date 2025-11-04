@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Vitor & Sarah — Nosso Tempo</title>
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
@@ -19,11 +19,11 @@
     </header>
 
     <main class="main">
-      <section class="panel counters">
+      <section class="card counters">
         <div class="card counter-card">
           <h2>Tempo juntos</h2>
-          <div id="loveTimer" class="big-time">-- anos • -- meses • -- dias • 00:00:00</div>
-          <p class="muted">Desde 04/10/2024</p>
+          <div id="totalDays" class="big-time">-- dias</div>
+          <div id="detailedTime" class="muted">-- anos • -- meses • -- dias • 00:00:00</div>
         </div>
 
         <div class="card counter-card">
@@ -33,6 +33,24 @@
             <div id="monthProgress" class="progress"></div>
           </div>
           <p class="muted">Mêsversário dia 4 de cada mês</p>
+        </div>
+      </section>
+
+      <section class="card counters">
+        <div class="card counter-card">
+          <h2>Contagem para o reencontro</h2>
+          <div id="reunionCountdown" class="big-time">Carregando...</div>
+          <p class="muted">Chegada prevista: 05/03/2026</p>
+        </div>
+
+        <div class="card counter-card">
+          <h2>Mensagem do dia</h2>
+          <div id="dailyMessage" class="big-time muted">Carregando...</div>
+          <div class="row" style="margin-top:10px;">
+            <button id="newDailyBtn">↻ Nova (hoje)</button>
+            <button id="toggleHearts">💞 Amor sem fim</button>
+            <button id="showQR">🎵 Música nossa</button>
+          </div>
         </div>
       </section>
 
@@ -54,15 +72,38 @@
         </div>
       </section>
 
+      <section class="card timeline">
+        <h2>Nossa História</h2>
+        <ol id="timelineList" class="muted">
+          <li><strong>04/10/2024</strong> — Início do namoro</li>
+          <li><strong>Primeira foto</strong> — Lembrança especial</li>
+          <li><strong>Primeira viagem</strong> — Nosso primeiro roteiro</li>
+          <li><strong>Próximos planos</strong> — Sonhos a realizar</li>
+        </ol>
+      </section>
+
       <section class="card actions">
         <h2>Ações</h2>
         <div class="row">
           <button id="randomMsgBtn">💌 Nova frase</button>
           <button id="kissBtn">😘 Beijo</button>
           <button id="hugBtn">🤗 Abraço</button>
-          <button id="heartsBtn">💘 Chuva de corações</button>
         </div>
         <div id="randomMsg" class="random-text">Você é meu motivo favorito para sorrir.</div>
+      </section>
+
+      <section id="qrcode-section" class="card">
+        <h2>Compartilhe Nosso Amor</h2>
+        <div id="qrcodeWrap" style="display:flex;gap:12px;align-items:center;justify-content:center;flex-direction:column">
+          <div id="qrcode" aria-hidden="true"></div>
+          <a id="spotifyLink" href="https://open.spotify.com/track/3KYlOzxN5xO7eEauO1VF06?si=d28c0866cc564af4" target="_blank" rel="noopener" class="muted">Abrir música no Spotify</a>
+        </div>
+        <div style="margin-top:12px; text-align:center">
+          <button id="embedToggle">▶ Ver player embutido</button>
+        </div>
+        <div id="spotifyEmbed" style="margin-top:12px; display:none;">
+          <iframe id="spotifyIframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/3KYlOzxN5xO7eEauO1VF06?utm_source=generator" width="100%" height="80" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
       </section>
     </main>
 
@@ -71,6 +112,7 @@
     </footer>
   </div>
 
+  <!-- modal -->
   <div id="modal" class="modal" aria-hidden="true">
     <div class="modal-box" role="dialog" aria-modal="true">
       <button id="modalClose" class="modal-close" aria-label="Fechar">✕</button>
@@ -79,6 +121,7 @@
     </div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
   <script src="script.js" defer></script>
 </body>
 </html>
