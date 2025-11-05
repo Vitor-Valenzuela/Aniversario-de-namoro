@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>💞 Flor de Namoro 💞</title>
+  <title>💞 Nosso Site 💞</title>
   <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
   <style>
     body {
@@ -41,63 +41,6 @@
       backdrop-filter: blur(3px);
     }
 
-    /* 🌷 Seção Nosso Tempo estilizada */
-    .counter-section {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background: linear-gradient(145deg, #ffd1dc, #ffe6f0);
-      border-radius: 25px;
-      padding: 30px 20px;
-      box-shadow: 0 10px 25px rgba(255, 105, 180, 0.25);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .counter-section:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 30px rgba(255, 105, 180, 0.4);
-    }
-
-    .counter-section h2 {
-      color: #b30059;
-      font-size: 1.8rem;
-      margin-bottom: 20px;
-      font-weight: 700;
-    }
-
-    .counters {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-    }
-
-    .counter-card {
-      background: white;
-      border-radius: 18px;
-      padding: 20px;
-      width: 230px;
-      box-shadow: 0 6px 15px rgba(255, 182, 193, 0.4);
-      transition: all 0.3s ease;
-      backdrop-filter: blur(5px);
-    }
-
-    .counter-card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 8px 20px rgba(255, 105, 180, 0.4);
-    }
-
-    .counter-icon {
-      font-size: 2rem;
-      margin-bottom: 8px;
-    }
-
-    .counter-value {
-      font-weight: 600;
-      font-size: 1.2rem;
-      color: #7a0043;
-    }
-
     button {
       background: linear-gradient(90deg, #ff8fb1, #ffb6c1);
       color: white;
@@ -115,10 +58,82 @@
       background: linear-gradient(90deg, #ff7aa2, #ffa2b8);
     }
 
+    .music-section {
+      text-align: center;
+      background: rgba(255, 182, 193, 0.3);
+      padding: 25px;
+      border-radius: 20px;
+      width: 85%;
+      margin: 30px auto;
+      box-shadow: 0 0 15px rgba(255, 192, 203, 0.4);
+      backdrop-filter: blur(4px);
+    }
+
+    .music-section h2 {
+      color: #b23a5a;
+      font-size: 1.6rem;
+      margin-bottom: 15px;
+      font-weight: 700;
+    }
+
+    .music-player {
+      overflow: hidden;
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(255, 0, 100, 0.3);
+      margin-bottom: 15px;
+    }
+
     #qrcode {
       margin: 15px auto 0;
       display: flex;
       justify-content: center;
+    }
+
+    /* Galeria */
+    .gallery-section {
+      text-align: center;
+      background: rgba(255, 182, 193, 0.25);
+      padding: 25px;
+      border-radius: 20px;
+      width: 85%;
+      margin: 30px auto;
+      box-shadow: 0 0 15px rgba(255, 182, 193, 0.4);
+    }
+
+    .gallery-section h2 {
+      color: #b23a5a;
+      font-size: 1.6rem;
+      margin-bottom: 15px;
+      font-weight: 700;
+    }
+
+    .gallery {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .gallery img {
+      width: 240px;
+      height: 240px;
+      object-fit: cover;
+      border-radius: 15px;
+      box-shadow: 0 0 12px rgba(255, 105, 180, 0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 18px rgba(255, 20, 147, 0.5);
+    }
+
+    .counter-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.1rem;
     }
 
     footer {
@@ -128,6 +143,7 @@
       opacity: 0.8;
     }
 
+    /* Corações flutuantes */
     .float-thing {
       position: fixed;
       bottom: 0;
@@ -142,6 +158,7 @@
       100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
     }
 
+    /* Tema escuro */
     .dark {
       background: linear-gradient(to bottom, #2b002b, #3a003a);
       color: #ffd1dc;
@@ -159,39 +176,47 @@
     <p class="sub">Vitor & Sarah — juntos desde 04/10/2024 🌷</p>
   </header>
 
-  <!-- 🌷 Contadores -->
+  <!-- Contadores -->
   <section class="counter-section">
-    <h2>⏳ Nosso Tempo Juntos</h2>
-    <div class="counters">
-      <div class="counter-card">
-        <div class="counter-icon">💑</div>
-        <p id="totalTime" class="counter-value"></p>
-      </div>
-      <div class="counter-card">
-        <div class="counter-icon">📅</div>
-        <p id="monthProgress" class="counter-value"></p>
-      </div>
-      <div class="counter-card">
-        <div class="counter-icon">💌</div>
-        <p id="reunionCountdown" class="counter-value"></p>
-      </div>
-      <div class="counter-card">
-        <div class="counter-icon">🎂</div>
-        <p id="nextMonthversary" class="counter-value"></p>
-      </div>
-    </div>
+    <h2>⏳ Nosso Tempo</h2>
+    <p id="tempoNamoro"></p>
+    <p id="proxMesversario"></p>
+    <p id="tempoReencontro"></p>
+  </section>
+
+  <!-- Mensagem do dia -->
+  <section>
+    <h2>💌 Mensagem do Dia</h2>
+    <p id="dailyMessage">Carregando mensagem...</p>
+    <button id="newDailyBtn">🔁 Nova Mensagem</button>
   </section>
 
   <!-- Música -->
-  <section>
+  <section class="music-section">
     <h2>🎧 Nossa Música</h2>
-    <iframe style="border-radius: 16px;"
-      src="https://open.spotify.com/embed/track/3KYlOzxN5xO7eEauO1VF06?utm_source=generator"
-      width="100%" height="352" frameborder="0"
-      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-      loading="lazy"></iframe>
+    <div class="music-player">
+      <iframe
+        style="border-radius: 16px;"
+        src="https://open.spotify.com/embed/track/3KYlOzxN5xO7eEauO1VF06?utm_source=generator"
+        width="100%"
+        height="352"
+        frameborder="0"
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy">
+      </iframe>
+    </div>
     <button id="showQRBtn">📱 Mostrar QR Code da Música</button>
     <div id="qrcode"></div>
+  </section>
+
+  <!-- Galeria -->
+  <section class="gallery-section">
+    <h2>📸 Nossa Galeria</h2>
+    <div class="gallery">
+      <img src="WhatsApp Image 2025-04-04 at 14.37.58.jpeg" alt="Foto 1">
+      <img src="WhatsApp Image 2025-04-04 at 14.49.26 (1).jpeg" alt="Foto 2">
+      <img src="WhatsApp Image 2025-04-04 at 14.49.26.jpeg" alt="Foto 3">
+    </div>
   </section>
 
   <!-- Botões -->
@@ -200,58 +225,80 @@
     <button id="themeToggle">🌗 Tema</button>
   </div>
 
-  <footer>💖 Feito com amor por Vitor Alex 💖</footer>
+  <footer>
+    <p>💖 Feito com amor por Vitor Alex 💖</p>
+  </footer>
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      const qrcodeEl = document.getElementById("qrcode");
-      const showQRBtn = document.getElementById("showQRBtn");
-      const toggleHeartsBtn = document.getElementById("toggleHeartsBtn");
-      const themeToggle = document.getElementById("themeToggle");
+      const inicioNamoro = new Date("2024-10-04T00:00:00");
+      const reencontro = new Date("2026-03-05T00:00:00");
 
-      // Datas
-      const startDate = new Date("2024-10-04T00:00:00");
-      const reunionDate = new Date("2026-03-05T00:00:00");
+      // Mensagens
+      const messages = [
+        "Você é o meu lugar favorito no mundo 💕",
+        "Com você, cada dia é mais bonito 🌸",
+        "Nada é por acaso, inclusive nós 💞",
+        "O amor é mais doce quando é com você 🍯",
+        "Você é o meu destino mais bonito ✨",
+        "Mesmo longe, você está em tudo o que eu vejo 💌",
+      ];
 
-      function updateTotalTime() {
-        const now = new Date();
-        const diff = now - startDate;
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const months = Math.floor(days / 30.44);
-        const years = Math.floor(months / 12);
-        document.getElementById("totalTime").textContent =
-          `${years} ano(s), ${months % 12} mês(es), ${days % 30} dia(s) juntos 💕`;
-      }
+      const dailyMessageEl = document.getElementById("dailyMessage");
+      const refreshDailyMessage = () => {
+        const today = new Date().toDateString();
+        if (localStorage.getItem("dailyDate") === today) {
+          dailyMessageEl.textContent = localStorage.getItem("dailyMsg");
+          return;
+        }
+        const msg = messages[Math.floor(Math.random() * messages.length)];
+        localStorage.setItem("dailyMsg", msg);
+        localStorage.setItem("dailyDate", today);
+        dailyMessageEl.textContent = msg;
+      };
+      document.getElementById("newDailyBtn").addEventListener("click", () => {
+        localStorage.removeItem("dailyDate");
+        refreshDailyMessage();
+      });
 
-      function updateMonthProgress() {
-        const now = new Date();
-        const daysInMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
-        const progress = ((now.getDate() / daysInMonth) * 100).toFixed(1);
-        document.getElementById("monthProgress").textContent =
-          `Mês em ${progress}% concluído 🌸`;
-      }
+      // Funções de contagem
+      function atualizarContadores() {
+        const agora = new Date();
 
-      function updateReunionCountdown() {
-        const now = new Date();
-        const diff = reunionDate - now;
-        const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
-        document.getElementById("reunionCountdown").textContent =
-          days > 0 ? `Faltam ${days} dias para o reencontro 💌`
-                   : `🎉 O reencontro chegou! 💖`;
-      }
+        // Tempo de namoro
+        let diffNamoro = agora - inicioNamoro;
+        let dias = Math.floor(diffNamoro / (1000 * 60 * 60 * 24));
+        let anos = Math.floor(dias / 365);
+        let meses = Math.floor((dias % 365) / 30);
+        let diasRestantes = dias - (anos * 365 + meses * 30);
+        document.getElementById("tempoNamoro").innerHTML = 
+          `💞 ${anos} ano(s), ${meses} mês(es) e ${diasRestantes} dia(s) juntos`;
 
-      function updateNextMonthversary() {
-        const now = new Date();
-        let next = new Date(now.getFullYear(), now.getMonth(), 4);
-        if (now.getDate() >= 4) next.setMonth(next.getMonth() + 1);
-        const diff = next - now;
-        const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
-        document.getElementById("nextMonthversary").textContent =
-          `Faltam ${days} dia(s) para o próximo mêsversário 🎂`;
+        // Próximo mesversário
+        let proximo = new Date(agora.getFullYear(), agora.getMonth(), 4);
+        if (agora.getDate() >= 4) {
+          proximo.setMonth(proximo.getMonth() + 1);
+        }
+        let diffMesv = proximo - agora;
+        let diasMesv = Math.floor(diffMesv / (1000 * 60 * 60 * 24));
+        let horasMesv = Math.floor((diffMesv / (1000 * 60 * 60)) % 24);
+        let minutosMesv = Math.floor((diffMesv / (1000 * 60)) % 60);
+        document.getElementById("proxMesversario").innerHTML =
+          `🎉 Próximo mesversário em ${diasMesv}d ${horasMesv}h ${minutosMesv}min`;
+
+        // Tempo até o reencontro
+        let diffReencontro = reencontro - agora;
+        let diasR = Math.floor(diffReencontro / (1000 * 60 * 60 * 24));
+        let horasR = Math.floor((diffReencontro / (1000 * 60 * 60)) % 24);
+        let minutosR = Math.floor((diffReencontro / (1000 * 60)) % 60);
+        let segundosR = Math.floor((diffReencontro / 1000) % 60);
+        document.getElementById("tempoReencontro").innerHTML =
+          `💌 Reencontro em ${diasR}d ${horasR}h ${minutosR}m ${segundosR}s`;
       }
 
       // QR Code
-      showQRBtn.addEventListener("click", () => {
+      document.getElementById("showQRBtn").addEventListener("click", () => {
+        const qrcodeEl = document.getElementById("qrcode");
         qrcodeEl.innerHTML = "";
         new QRCode(qrcodeEl, {
           text: "https://open.spotify.com/track/3KYlOzxN5xO7eEauO1VF06",
@@ -263,15 +310,22 @@
         });
       });
 
-      // Tema
+      // Tema escuro
+      const themeToggle = document.getElementById("themeToggle");
       themeToggle.addEventListener("click", () => {
         document.body.classList.toggle("dark");
-        localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark" : "light");
+        localStorage.setItem(
+          "theme",
+          document.body.classList.contains("dark") ? "dark" : "light"
+        );
       });
-      if (localStorage.getItem("theme") === "dark") document.body.classList.add("dark");
+      if (localStorage.getItem("theme") === "dark") {
+        document.body.classList.add("dark");
+      }
 
       // Corações flutuantes
       let heartsActive = false;
+      const toggleHeartsBtn = document.getElementById("toggleHeartsBtn");
       const createHeart = () => {
         if (!heartsActive) return;
         const h = document.createElement("div");
@@ -287,18 +341,11 @@
         if (heartsActive) setInterval(createHeart, 500);
       });
 
-      // Atualização contínua
-      function updateAll() {
-        updateTotalTime();
-        updateMonthProgress();
-        updateReunionCountdown();
-        updateNextMonthversary();
-      }
-
-      updateAll();
-      setInterval(updateAll, 1000);
+      // Inicialização
+      refreshDailyMessage();
+      atualizarContadores();
+      setInterval(atualizarContadores, 1000);
     });
   </script>
 </body>
 </html>
-
