@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>💞 Flor de Namoro 💞</title>
+  <title>💞 Nosso Site 💞</title>
   <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
   <style>
     body {
@@ -178,10 +178,10 @@
 
   <!-- Contadores -->
   <section class="counter-section">
-    <h2>⏳ Nosso Tempo Juntos</h2>
-    <p id="totalTime"></p>
-    <p id="monthProgress"></p>
-    <p id="reunionCountdown"></p>
+    <h2>⏳ Nosso Tempo</h2>
+    <p id="tempoNamoro"></p>
+    <p id="proxMesversario"></p>
+    <p id="tempoReencontro"></p>
   </section>
 
   <!-- Mensagem do dia -->
@@ -191,7 +191,7 @@
     <button id="newDailyBtn">🔁 Nova Mensagem</button>
   </section>
 
-  <!-- Nossa música -->
+  <!-- Música -->
   <section class="music-section">
     <h2>🎧 Nossa Música</h2>
     <div class="music-player">
@@ -209,7 +209,7 @@
     <div id="qrcode"></div>
   </section>
 
-  <!-- Galeria de Fotos -->
+  <!-- Galeria -->
   <section class="gallery-section">
     <h2>📸 Nossa Galeria</h2>
     <div class="gallery">
@@ -231,12 +231,10 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      const dailyMessageEl = document.getElementById("dailyMessage");
-      const qrcodeEl = document.getElementById("qrcode");
-      const showQRBtn = document.getElementById("showQRBtn");
-      const toggleHeartsBtn = document.getElementById("toggleHeartsBtn");
-      const themeToggle = document.getElementById("themeToggle");
+      const inicioNamoro = new Date("2024-10-04T00:00:00");
+      const reencontro = new Date("2026-03-05T00:00:00");
 
+      // Mensagens
       const messages = [
         "Você é o meu lugar favorito no mundo 💕",
         "Com você, cada dia é mais bonito 🌸",
@@ -246,57 +244,61 @@
         "Mesmo longe, você está em tudo o que eu vejo 💌",
       ];
 
-      // Mensagem do dia
-      const getDailyMessage = () => {
+      const dailyMessageEl = document.getElementById("dailyMessage");
+      const refreshDailyMessage = () => {
         const today = new Date().toDateString();
         if (localStorage.getItem("dailyDate") === today) {
-          return localStorage.getItem("dailyMsg");
+          dailyMessageEl.textContent = localStorage.getItem("dailyMsg");
+          return;
         }
         const msg = messages[Math.floor(Math.random() * messages.length)];
         localStorage.setItem("dailyMsg", msg);
         localStorage.setItem("dailyDate", today);
-        return msg;
-      };
-      const refreshDailyMessage = () => {
-        dailyMessageEl.textContent = getDailyMessage();
+        dailyMessageEl.textContent = msg;
       };
       document.getElementById("newDailyBtn").addEventListener("click", () => {
         localStorage.removeItem("dailyDate");
         refreshDailyMessage();
       });
 
-      // Contadores
-      const startDate = new Date("2024-10-04T00:00:00");
-      const reunionDate = new Date("2025-12-31T00:00:00");
+      // Funções de contagem
+      function atualizarContadores() {
+        const agora = new Date();
 
-      function updateTotalTime() {
-        const now = new Date();
-        const diff = now - startDate;
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const months = Math.floor(days / 30.44);
-        const years = Math.floor(months / 12);
-        document.getElementById("totalTime").textContent =
-          `💑 ${years} ano(s), ${months % 12} mês(es) e ${days % 30} dia(s) juntos!`;
+        // Tempo de namoro
+        let diffNamoro = agora - inicioNamoro;
+        let dias = Math.floor(diffNamoro / (1000 * 60 * 60 * 24));
+        let anos = Math.floor(dias / 365);
+        let meses = Math.floor((dias % 365) / 30);
+        let diasRestantes = dias - (anos * 365 + meses * 30);
+        document.getElementById("tempoNamoro").innerHTML = 
+          `💞 ${anos} ano(s), ${meses} mês(es) e ${diasRestantes} dia(s) juntos`;
+
+        // Próximo mesversário
+        let proximo = new Date(agora.getFullYear(), agora.getMonth(), 4);
+        if (agora.getDate() >= 4) {
+          proximo.setMonth(proximo.getMonth() + 1);
+        }
+        let diffMesv = proximo - agora;
+        let diasMesv = Math.floor(diffMesv / (1000 * 60 * 60 * 24));
+        let horasMesv = Math.floor((diffMesv / (1000 * 60 * 60)) % 24);
+        let minutosMesv = Math.floor((diffMesv / (1000 * 60)) % 60);
+        document.getElementById("proxMesversario").innerHTML =
+          `🎉 Próximo mesversário em ${diasMesv}d ${horasMesv}h ${minutosMesv}min`;
+
+        // Tempo até o reencontro
+        let diffReencontro = reencontro - agora;
+        let diasR = Math.floor(diffReencontro / (1000 * 60 * 60 * 24));
+        let horasR = Math.floor((diffReencontro / (1000 * 60 * 60)) % 24);
+        let minutosR = Math.floor((diffReencontro / (1000 * 60)) % 60);
+        let segundosR = Math.floor((diffReencontro / 1000) % 60);
+        document.getElementById("tempoReencontro").innerHTML =
+          `💌 Reencontro em ${diasR}d ${horasR}h ${minutosR}m ${segundosR}s`;
       }
 
-      function updateMonthProgress() {
-        const now = new Date();
-        const daysInMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
-        const progress = ((now.getDate() / daysInMonth) * 100).toFixed(1);
-        document.getElementById("monthProgress").textContent =
-          `📅 Mês em ${progress}% concluído`;
-      }
-
-      function updateReunionCountdown() {
-        const now = new Date();
-        const diff = reunionDate - now;
-        const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
-        document.getElementById("reunionCountdown").textContent =
-          `💌 Faltam ${days} dia(s) para o reencontro!`;
-      }
-
-      // QR code
-      showQRBtn.addEventListener("click", () => {
+      // QR Code
+      document.getElementById("showQRBtn").addEventListener("click", () => {
+        const qrcodeEl = document.getElementById("qrcode");
         qrcodeEl.innerHTML = "";
         new QRCode(qrcodeEl, {
           text: "https://open.spotify.com/track/3KYlOzxN5xO7eEauO1VF06",
@@ -309,6 +311,7 @@
       });
 
       // Tema escuro
+      const themeToggle = document.getElementById("themeToggle");
       themeToggle.addEventListener("click", () => {
         document.body.classList.toggle("dark");
         localStorage.setItem(
@@ -322,6 +325,7 @@
 
       // Corações flutuantes
       let heartsActive = false;
+      const toggleHeartsBtn = document.getElementById("toggleHeartsBtn");
       const createHeart = () => {
         if (!heartsActive) return;
         const h = document.createElement("div");
@@ -337,16 +341,10 @@
         if (heartsActive) setInterval(createHeart, 500);
       });
 
-      // Atualizações contínuas
+      // Inicialização
       refreshDailyMessage();
-      updateTotalTime();
-      updateMonthProgress();
-      updateReunionCountdown();
-      setInterval(() => {
-        updateTotalTime();
-        updateMonthProgress();
-        updateReunionCountdown();
-      }, 1000);
+      atualizarContadores();
+      setInterval(atualizarContadores, 1000);
     });
   </script>
 </body>
