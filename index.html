@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>💞 Nosso Site 💞</title>
+  <title>💞 Flor de Namoro 💞</title>
   <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
   <style>
     body {
@@ -89,6 +89,45 @@
       justify-content: center;
     }
 
+    /* Galeria */
+    .gallery-section {
+      text-align: center;
+      background: rgba(255, 182, 193, 0.25);
+      padding: 25px;
+      border-radius: 20px;
+      width: 85%;
+      margin: 30px auto;
+      box-shadow: 0 0 15px rgba(255, 182, 193, 0.4);
+    }
+
+    .gallery-section h2 {
+      color: #b23a5a;
+      font-size: 1.6rem;
+      margin-bottom: 15px;
+      font-weight: 700;
+    }
+
+    .gallery {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .gallery img {
+      width: 240px;
+      height: 240px;
+      object-fit: cover;
+      border-radius: 15px;
+      box-shadow: 0 0 12px rgba(255, 105, 180, 0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 18px rgba(255, 20, 147, 0.5);
+    }
+
     .counter-section {
       display: flex;
       flex-direction: column;
@@ -168,6 +207,16 @@
     </div>
     <button id="showQRBtn">📱 Mostrar QR Code da Música</button>
     <div id="qrcode"></div>
+  </section>
+
+  <!-- Galeria de Fotos -->
+  <section class="gallery-section">
+    <h2>📸 Nossa Galeria</h2>
+    <div class="gallery">
+      <img src="WhatsApp Image 2025-04-04 at 14.37.58.jpeg" alt="Foto 1">
+      <img src="WhatsApp Image 2025-04-04 at 14.49.26 (1).jpeg" alt="Foto 2">
+      <img src="WhatsApp Image 2025-04-04 at 14.49.26.jpeg" alt="Foto 3">
+    </div>
   </section>
 
   <!-- Botões -->
@@ -302,4 +351,3 @@
   </script>
 </body>
 </html>
-
