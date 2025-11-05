@@ -21,84 +21,81 @@
     }
 
     h1 {
-      font-size: 2.4rem;
+      font-size: 2.2rem;
       color: #b30059;
-      margin-bottom: 5px;
     }
 
     .sub {
       color: #7a0043;
-      font-size: 1rem;
+      font-size: 0.95rem;
     }
 
     section {
       margin: 30px auto;
       width: 85%;
-      max-width: 850px;
-      background: rgba(255, 255, 255, 0.7);
+      max-width: 800px;
+      background: rgba(255, 255, 255, 0.6);
       border-radius: 20px;
       padding: 25px;
       box-shadow: 0 0 15px rgba(255, 182, 193, 0.4);
-      backdrop-filter: blur(6px);
+      backdrop-filter: blur(3px);
     }
 
-    /* 🌸 Seção de contadores refinada */
+    /* 🌷 Seção Nosso Tempo estilizada */
     .counter-section {
-      background: linear-gradient(135deg, #fff0f5, #ffe4ec);
-      border: 2px solid rgba(255, 105, 180, 0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: linear-gradient(145deg, #ffd1dc, #ffe6f0);
       border-radius: 25px;
-      box-shadow: 0 5px 20px rgba(255, 182, 193, 0.3);
-      padding: 40px 20px;
-      animation: fadeIn 1s ease;
+      padding: 30px 20px;
+      box-shadow: 0 10px 25px rgba(255, 105, 180, 0.25);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .counter-section:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(255, 105, 180, 0.4);
     }
 
     .counter-section h2 {
-      font-size: 1.9rem;
       color: #b30059;
-      margin-bottom: 25px;
+      font-size: 1.8rem;
+      margin-bottom: 20px;
       font-weight: 700;
-      letter-spacing: 1px;
     }
 
-    .counter-cards {
+    .counters {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 25px;
+      gap: 20px;
     }
 
     .counter-card {
       background: white;
-      width: 200px;
       border-radius: 18px;
-      padding: 20px 10px;
-      box-shadow: 0 4px 10px rgba(255, 105, 180, 0.25);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      animation: floatCard 1s ease;
+      padding: 20px;
+      width: 230px;
+      box-shadow: 0 6px 15px rgba(255, 182, 193, 0.4);
+      transition: all 0.3s ease;
+      backdrop-filter: blur(5px);
     }
 
     .counter-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 18px rgba(255, 105, 180, 0.35);
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(255, 105, 180, 0.4);
     }
 
     .counter-icon {
       font-size: 2rem;
-      color: #e64b8b;
       margin-bottom: 8px;
     }
 
     .counter-value {
       font-weight: 600;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       color: #7a0043;
-    }
-
-    /* QR Code centralizado */
-    #qrcode {
-      display: flex;
-      justify-content: center;
-      margin-top: 15px;
     }
 
     button {
@@ -116,6 +113,12 @@
     button:hover {
       transform: scale(1.05);
       background: linear-gradient(90deg, #ff7aa2, #ffa2b8);
+    }
+
+    #qrcode {
+      margin: 15px auto 0;
+      display: flex;
+      justify-content: center;
     }
 
     footer {
@@ -139,16 +142,6 @@
       100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes floatCard {
-      from { opacity: 0; transform: scale(0.9); }
-      to { opacity: 1; transform: scale(1); }
-    }
-
     .dark {
       background: linear-gradient(to bottom, #2b002b, #3a003a);
       color: #ffd1dc;
@@ -169,22 +162,22 @@
   <!-- 🌷 Contadores -->
   <section class="counter-section">
     <h2>⏳ Nosso Tempo Juntos</h2>
-    <div class="counter-cards">
+    <div class="counters">
       <div class="counter-card">
         <div class="counter-icon">💑</div>
-        <div id="totalTime" class="counter-value"></div>
+        <p id="totalTime" class="counter-value"></p>
       </div>
       <div class="counter-card">
-        <div class="counter-icon">📆</div>
-        <div id="monthProgress" class="counter-value"></div>
+        <div class="counter-icon">📅</div>
+        <p id="monthProgress" class="counter-value"></p>
       </div>
       <div class="counter-card">
         <div class="counter-icon">💌</div>
-        <div id="reunionCountdown" class="counter-value"></div>
+        <p id="reunionCountdown" class="counter-value"></p>
       </div>
       <div class="counter-card">
         <div class="counter-icon">🎂</div>
-        <div id="nextMonthversary" class="counter-value"></div>
+        <p id="nextMonthversary" class="counter-value"></p>
       </div>
     </div>
   </section>
@@ -216,6 +209,7 @@
       const toggleHeartsBtn = document.getElementById("toggleHeartsBtn");
       const themeToggle = document.getElementById("themeToggle");
 
+      // Datas
       const startDate = new Date("2024-10-04T00:00:00");
       const reunionDate = new Date("2026-03-05T00:00:00");
 
@@ -226,7 +220,7 @@
         const months = Math.floor(days / 30.44);
         const years = Math.floor(months / 12);
         document.getElementById("totalTime").textContent =
-          `${years} ano(s), ${months % 12} mês(es) e ${days % 30} dia(s) 💕`;
+          `${years} ano(s), ${months % 12} mês(es), ${days % 30} dia(s) juntos 💕`;
       }
 
       function updateMonthProgress() {
@@ -234,7 +228,7 @@
         const daysInMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
         const progress = ((now.getDate() / daysInMonth) * 100).toFixed(1);
         document.getElementById("monthProgress").textContent =
-          `Mês ${progress}% concluído 🌸`;
+          `Mês em ${progress}% concluído 🌸`;
       }
 
       function updateReunionCountdown() {
@@ -242,7 +236,8 @@
         const diff = reunionDate - now;
         const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
         document.getElementById("reunionCountdown").textContent =
-          days > 0 ? `Faltam ${days} dias 💌` : `🎉 O reencontro chegou 💖`;
+          days > 0 ? `Faltam ${days} dias para o reencontro 💌`
+                   : `🎉 O reencontro chegou! 💖`;
       }
 
       function updateNextMonthversary() {
@@ -252,9 +247,10 @@
         const diff = next - now;
         const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
         document.getElementById("nextMonthversary").textContent =
-          `🎂 ${days} dia(s) até o mêsversário`;
+          `Faltam ${days} dia(s) para o próximo mêsversário 🎂`;
       }
 
+      // QR Code
       showQRBtn.addEventListener("click", () => {
         qrcodeEl.innerHTML = "";
         new QRCode(qrcodeEl, {
@@ -267,12 +263,14 @@
         });
       });
 
+      // Tema
       themeToggle.addEventListener("click", () => {
         document.body.classList.toggle("dark");
         localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark" : "light");
       });
       if (localStorage.getItem("theme") === "dark") document.body.classList.add("dark");
 
+      // Corações flutuantes
       let heartsActive = false;
       const createHeart = () => {
         if (!heartsActive) return;
@@ -289,6 +287,7 @@
         if (heartsActive) setInterval(createHeart, 500);
       });
 
+      // Atualização contínua
       function updateAll() {
         updateTotalTime();
         updateMonthProgress();
